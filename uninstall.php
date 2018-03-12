@@ -8,6 +8,6 @@
 	// remove plugin options
 	global $wpdb;
 
-	$wpdb->query("DELETE FROM {$wpdb->prefix}options WHERE option_name LIKE 'wbcr_dan_%';");
+	$wpdb->query("DELETE FROM {$wpdb->prefix}options WHERE option_name LIKE 'wbcr_cyrlitera_%';");
 
 

@@ -1,11 +1,11 @@
 <?php
 	/**
-	 * Plugin Name: Webcraftic Disable Admin Notices Individually
-	 * Plugin URI: https://wordpress.org/plugins/disable-admin-notices/
+	 * Plugin Name: Webcraftic cyrilic transliteration
+	 * Plugin URI: https://wordpress.org/plugins/cyrlitera/
 	 * Description: Disable admin notices plugin gives you the option to hide updates warnings and inline notices in the admin panel.
 	 * Author: Webcraftic <wordpress.webraftic@gmail.com>
-	 * Version: 1.0.3
-	 * Text Domain: disable-admin-notices
+	 * Version: 1.0.0
+	 * Text Domain: cyrlitera
 	 * Domain Path: /languages/
 	 */
 
@@ -14,25 +14,25 @@
 		exit;
 	}
 
-	if( defined('WDN_PLUGIN_ACTIVE') || (defined('WCL_PLUGIN_ACTIVE') && !defined('LOADING_DISABLE_ADMIN_NOTICES_AS_ADDON')) ) {
-		function wbcr_dan_admin_notice_error()
+	if( defined('WCTR_PLUGIN_ACTIVE') || (defined('WCL_PLUGIN_ACTIVE') && !defined('LOADING_CYRLITERA_AS_ADDON')) ) {
+		function wbcr_cyrlitera_admin_notice_error()
 		{
 			?>
 			<div class="notice notice-error">
-				<p><?php _e('We found that you have the "Clearfy - disable unused features" plugin installed, this plugin already has disable comments functions, so you can deactivate plugin "Disable admin notices"!'); ?></p>
+				<p><?php _e('We found that you have the "Clearfy - disable unused features" plugin installed, this plugin already has disable comments functions, so you can deactivate plugin "Cyrilic transliteration"!'); ?></p>
 			</div>
 		<?php
 		}
 
-		add_action('admin_notices', 'wbcr_dan_admin_notice_error');
+		add_action('admin_notices', 'wbcr_cyrlitera_admin_notice_error');
 
 		return;
 	} else {
 
-		define('WDN_PLUGIN_ACTIVE', true);
-		define('WDN_PLUGIN_DIR', dirname(__FILE__));
-		define('WDN_PLUGIN_BASE', plugin_basename(__FILE__));
-		define('WDN_PLUGIN_URL', plugins_url(null, __FILE__));
+		define('WCTR_PLUGIN_ACTIVE', true);
+		define('WCTR_PLUGIN_DIR', dirname(__FILE__));
+		define('WCTR_PLUGIN_BASE', plugin_basename(__FILE__));
+		define('WCTR_PLUGIN_URL', plugins_url(null, __FILE__));
 
 		#comp remove
 		// the following constants are used to debug features of diffrent builds
@@ -58,30 +58,31 @@
 		// the compiler library provides a set of functions like onp_build and onp_license
 		// to check how the plugin work for diffrent builds on developer machines
 
-		if( !defined('LOADING_DISABLE_ADMIN_NOTICES_AS_ADDON') ) {
+		if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
 			require('libs/onepress/compiler/boot.php');
 			// creating a plugin via the factory
 		}
 		// #fix compiller bug new Factory000_Plugin
 		#endcomp
 		
-		if( !defined('LOADING_DISABLE_ADMIN_NOTICES_AS_ADDON') ) {
-			require_once(WDN_PLUGIN_DIR . '/libs/factory/core/boot.php');
+		if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
+			require_once(WCTR_PLUGIN_DIR . '/libs/factory/core/boot.php');
 		}
 
-		require_once(WDN_PLUGIN_DIR . '/includes/class.plugin.php');
+		require_once(WCTR_PLUGIN_DIR . '/includes/class.helpers.php');
+		require_once(WCTR_PLUGIN_DIR . '/includes/class.plugin.php');
 
-		if( !defined('LOADING_DISABLE_ADMIN_NOTICES_AS_ADDON') ) {
+		if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
 
-			new WDN_Plugin(__FILE__, array(
-				'prefix' => 'wbcr_dan_',
-				'plugin_name' => 'disable_admin_notices',
-				'plugin_title' => __('Webcraftic disable admin notices', 'disable-admin-notices'),
-				'plugin_version' => '1.0.3',
+			new WCTR_Plugin(__FILE__, array(
+				'prefix' => 'wbcr_cyrlitera_',
+				'plugin_name' => 'cyrlitera',
+				'plugin_title' => __('Webcraftic cyrilic transliteration', 'cyrlitera'),
+				'plugin_version' => '1.0.0',
 				'required_php_version' => '5.2',
 				'required_wp_version' => '4.2',
 				'plugin_build' => BUILD_TYPE,
-				'updates' => WDN_PLUGIN_DIR . '/updates/'
+				'updates' => WCTR_PLUGIN_DIR . '/updates/'
 			));
 		}
 	}
