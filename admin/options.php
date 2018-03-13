@@ -20,43 +20,37 @@
 
 		$options[] = array(
 			'type' => 'html',
-			'html' => '<div class="wbcr-factory-page-group-header">' . '<strong>' . __('Кирилическая транслитерация.', 'cyrlitera') . '</strong>' . '<p>' . __('Конвертирует кирилические постоянные ссылки записей, стараниц, тегов, медиа и файлов на латиницу. Поддерживает Грузинский, Болгарский, Украинский, Русский язык. Пример: http://site.dev/последние-новости -> http://site.dev/poslednie-novosti', 'cyrlitera') . '</p>' . '</div>'
+			'html' => '<div class="wbcr-factory-page-group-header">' . '<strong>' . __('Transliteration of Cyrillic alphabet.', 'cyrlitera') . '</strong>' . '<p>' . __('Converts Cyrillic permalinks of post, pages, taxonomies and media files to the Latin alphabet. Supports Russian, Ukrainian, Georgian, Bulgarian languages. Example: http://site.dev/последние-новости -> http://site.dev/poslednie-novosti', 'cyrlitera') . '</p>' . '</div>'
 		);
 
 		$options[] = array(
 			'type' => 'checkbox',
 			'way' => 'buttons',
 			'name' => 'use_transliterations',
-			'title' => __('Использовать транслитерацию', 'cyrlitera'),
+			'title' => __('Use transliteration', 'cyrlitera'),
 			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'green'),
-			'hint' => __('Если включить эту опцию, постоянный url всех ваших старых статей и страниц будет преобразован в url с латинскими символами. Все новые страницы и записи, также будут иметь url на латинице.', 'cyrlitera'),
+			'hint' => __('If you enable this option, the permanent URLs of all previously published posts and pages will be converted into URLs with Latin characters. All new pages and posts will also have a URL in the Latin alphabet.', 'cyrlitera'),
 			'default' => false
 		);
 		$options[] = array(
 			'type' => 'checkbox',
 			'way' => 'buttons',
 			'name' => 'use_transliterations_filename',
-			'title' => __('Преобразовывать имена файлов', 'cyrlitera'),
+			'title' => __('Convert file names', 'cyrlitera'),
 			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'green'),
-			'hint' => __('Эта опция работает только для новых загруженных файлов, все загруженные файлы с кирилическими символами, будут преобразованы в имена с латинскими символами.', 'cyrlitera'),
+			'hint' => __('This option works only for new media library files. All Cyrillic names of the downloaded files will be converted to names with Latin characters.', 'cyrlitera'),
 			'default' => false
 		);
-
-		if( defined('LOADING_CYRLITERA_AS_ADDON') ) {
-			$options[] = array(
-				'type' => 'separator'
-			);
-		}
 
 		return $options;
 	}
 
 	/**
 	 * @param $form
-	 * @param $page FactoryPages000_ImpressiveThemplate
+	 * @param $page Wbcr_FactoryPages000_ImpressiveThemplate
 	 * @return mixed
 	 */
-	function wbcr_cyrlitera_additionally_form_options($form, $page)
+	function wbcr_cyrlitera_seo_form_options($form, $page)
 	{
 		if( empty($form) ) {
 			return $form;
@@ -71,4 +65,4 @@
 		return $form;
 	}
 
-	add_filter('wbcr_clr_seo_form_options', 'wbcr_cyrlitera_additionally_form_options', 10, 2);
+	add_filter('wbcr_clr_seo_form_options', 'wbcr_cyrlitera_seo_form_options', 10, 2);
