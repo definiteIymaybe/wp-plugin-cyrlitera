@@ -40,8 +40,6 @@
 
 			parent::__construct($plugin);
 
-			add_action('wbcr_factory_000_imppage_flush_cache', array($this, 'afterSave'), 10, 2);
-
 			$this->plugin = $plugin;
 		}
 
@@ -52,18 +50,16 @@
 				: __('General', 'cyrlitera');
 		}
 
-		public function afterSave($plugin_name, $result_id)
+		protected function afterFormSave()
 		{
-			if( $plugin_name == WCTR_Plugin::app()->getPluginName() && $result_id == $this->getResultId() ) {
-				$use_transliterations = $this->plugin->getOption('use_transliterations');
-				$transliterate_existing_slugs = $this->plugin->getOption('transliterate_existing_slugs');
+			$use_transliterations = $this->plugin->getOption('use_transliterations');
+			$transliterate_existing_slugs = $this->plugin->getOption('transliterate_existing_slugs');
 
-				if( !$use_transliterations || $transliterate_existing_slugs ) {
-					return;
-				}
-				WCTR_Helper::convertExistingSlugs();
-				$this->plugin->updateOption('transliterate_existing_slugs', 1);
+			if( !$use_transliterations || $transliterate_existing_slugs ) {
+				return;
 			}
+			WCTR_Helper::convertExistingSlugs();
+			$this->plugin->updateOption('transliterate_existing_slugs', 1);
 		}
 
 		/**
