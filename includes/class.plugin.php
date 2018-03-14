@@ -85,7 +85,7 @@
 			protected function setTextDomain()
 			{
 				// Localization plugin
-				load_plugin_textdomain('cyrlitera', false, dirname(WCTR_PLUGIN_DIR) . '/languages/');
+				load_plugin_textdomain('cyrlitera', false, dirname(WCTR_PLUGIN_BASE) . '/languages/');
 			}
 			
 			protected function setModules()
