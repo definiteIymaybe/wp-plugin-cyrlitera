@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: clearfy\n"
-"POT-Creation-Date: 2018-02-05 02:02+0300\n"
-"PO-Revision-Date: 2018-02-05 02:02+0300\n"
+"POT-Creation-Date: 2018-03-14 17:03+0300\n"
+"PO-Revision-Date: 2018-03-14 17:07+0300\n"
 "Last-Translator: alex.kovalevv@gmail.com <alex.kovalevv@gmail.com>\n"
 "Language-Team: Alex Kovalev <alex.kovalevv@gmail.com>\n"
 "Language: ru_RU\n"
@@ -18,161 +18,219 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: libs\n"
 
-#: admin/ajax/hide-notice.php:16 admin/ajax/restore-notice.php:16
-msgid "You don't have enough capability to edit this information."
-msgstr "Вы не имеете разрешения на редактирование этого!"
+#: admin/boot.php:22
+#, php-format
+msgid ""
+"We found that you have the plugin %s installed. The functions of this plugin "
+"already exist in %s. Please deactivate plugin %s to avoid conflicts between "
+"plugins functions."
+msgstr ""
+"Мы обнаружили, что у вас установлен плагин %s, функции этого плагина уже "
+"есть в %s. Пожалуйста, деактивируйте плагин %s во избежание конфликтов между "
+"функциями плагинов."
 
-#: admin/ajax/hide-notice.php:33 admin/ajax/restore-notice.php:25
-msgid "Undefinded notice id."
-msgstr "Не передан notice id."
+#: admin/boot.php:23
+#, php-format
+msgid ""
+"If you do not want to deactivate the plugin %s for some reason, we strongly "
+"recommend do not use the same plugins functions at the same time!"
+msgstr ""
+"Если по какой-то причине вы не хотите деактивировать плагин %s, то мы "
+"настоятельно рекомендуем не использовать похожие функции плагинов "
+"одновременно!"
 
-#: admin/ajax/hide-notice.php:47 admin/ajax/restore-notice.php:37
-msgid "Success"
-msgstr "Успешно"
+#: admin/boot.php:93 admin/options.php:30
+msgid "Use transliteration"
+msgstr "Использовать транслитерацию"
 
-#: admin/boot.php:39 admin/options.php:27 admin/pages/notices.php:24
-msgid "Hide admin notices"
-msgstr "Скрыть уведомления"
+#: admin/boot.php:100 admin/options.php:39
+msgid "Convert file names"
+msgstr "Конвертировать имена файлов"
 
-#: admin/boot.php:45 admin/options.php:67
-msgid "Enable hidden notices in adminbar"
-msgstr "Включить уведомления в админбаре"
-
-#: admin/boot.php:61
+#: admin/boot.php:112
 msgid "Get ultimate plugin free"
 msgstr "Получите полную версию плагина бесплатно"
 
-#: admin/options.php:19
-msgid "Admin notifications, Update nags"
-msgstr "Уведомления администратора, уведомления об обновлении Wordpress"
+#: admin/options.php:23
+msgid "Transliteration of Cyrillic alphabet."
+msgstr "Транслитерация кириллицы."
 
-#: admin/options.php:19
+#: admin/options.php:23
 msgid ""
-"Do you know the situation, when some plugin offers you to update to premium, "
-"to collect technical data and shows many annoying notices? You are close "
-"these notices every now and again but they newly appears and interfere your "
-"work with WordPress. Even worse, some plugin’s authors delete “close” button "
-"from notices and they shows in your admin panel forever."
+"Converts Cyrillic permalinks of post, pages, taxonomies and media files to "
+"the Latin alphabet. Supports Russian, Ukrainian, Georgian, Bulgarian "
+"languages. Example: http://site.dev/последние-новости -> http://site.dev/"
+"poslednie-novosti"
 msgstr ""
-"Вам знакома ситуация, когда какой-то плагин просит вас обновиться до премиум-"
-"версии, получить права на сбор данных о вашем сайте и создает много "
-"раздражающих уведомлений? Вы закрываете эти уведомления раз за разом, но они "
-"вновь появляются и мешают вашей работе с WordPress. Хуже того, некоторые "
-"авторы и вовсе удаляют кнопку “закрыть” из уведомлений, и они висят в шапке "
-"вашей панели администратора целую вечность."
-
-#: admin/options.php:31
-msgid "All notices"
-msgstr "Все уведомления"
+"Конвертирует кириллические постоянные ссылки записей, страниц, таксономий и "
+"медиафайлов в латиницу. Поддерживает Русский, Украинский, Грузинский, "
+"Болгарский языки. Пример: http://site.dev/последние-новости -> http://site."
+"dev/poslednie-novosti"
 
 #: admin/options.php:32
-msgid "Hide all notices globally."
-msgstr "Скрыть все уведомления глобально."
-
-#: admin/options.php:36
-msgid "Only selected"
-msgstr "Только выбранные"
-
-#: admin/options.php:37
 msgid ""
-"Hide selected notices only. You will see the link \"Hide notification forever"
-"\" in each notice. Push it and they will not bother you anymore."
+"If you enable this option, the permanent URLs of all previously published "
+"posts and pages will be converted into URLs with Latin characters. All new "
+"pages and posts will also have a URL in the Latin alphabet."
 msgstr ""
-"Скрывать только выбранные уведомления. В каждом уведомлении вы увидите "
-"ссылку \"Скрыть уведомление навсегда\". Нажмите на неё и уведомление будет "
-"скрыто навсегда и перестанет вас беспокоить."
+"Если включить эту опцию, постоянные URL всех ранее опубликованных записей и "
+"страниц будут преобразованы в URL с латинскими символами. Все новые страницы "
+"и записи, также будут иметь URL на латинице."
 
 #: admin/options.php:41
-msgid "Don't nide"
-msgstr "Не скрывать"
-
-#: admin/options.php:42
 msgid ""
-"Do not hide notices and do not show “Hide notification forever” link for "
-"admin."
+"This option works only for new media library files. All Cyrillic names of "
+"the downloaded files will be converted to names with Latin characters."
 msgstr ""
-"Не скрывать уведомления и не показывать ссылку \"Скрыть уведомление навсегда"
-"\" в уведомлениях администратора."
+"Эта опция работает только для новых файлов медиа библиотеки. Все "
+"кириллические имена загружаемых файлов, будут преобразованы в имена с "
+"латинскими символами."
 
-#: admin/options.php:46
-msgid ""
-"Some plugins shows notifications about premium version, data collecting or "
-"promote their services. Even if you push close button (that sometimes are "
-"impossible), notices are shows again in some time. This option allows you to "
-"control notices. Hide them all or each individually. Some plugins shows "
-"notifications about premium version, data collecting or promote their "
-"services. Even if you push close button (that sometimes are impossible), "
-"notices are shows again in some time. This option allows you to control "
-"notices. Hide them all or each individually."
-msgstr ""
-"Зачастую, плагины отображают уведомления о возможности перехода на премиум "
-"версию, просят разрешение на сбор данных, рекламируют свои услуги. Даже если "
-"вы нажмете кнопку закрыть (что не всегда возможно), уведомления всё равно "
-"отобразятся через какое-то время. С помощью этой настройки, вы можете "
-"контролировать эти уведомления. Скройте их все сразу или каждое по "
-"отдельности."
+#: admin/pages/cyrlitera.php:33 admin/pages/cyrlitera.php:49
+msgid "Transliteration"
+msgstr "Транслитерация"
 
-#: admin/options.php:69
-msgid ""
-"By default, the plugin hides all notices, which you specified. If you enable "
-"this option, the plugin will collect all hidden notices and show them into "
-"the top admin toolbar. It will not disturb you but will allow to look "
-"notices at your convenience."
-msgstr ""
-"По умолчанию, плагин полностью скрывает отключенные вами уведомления. Если "
-"включить эту опцию, то плагин будет собирать все скрытые вами уведомления и "
-"выводить в верхней панели администратора. Это не будет вас раздражать, но и "
-"позволит просматривать уведомления, когда вам это удобно."
-
-#: admin/options.php:135
-msgid "Push reset hidden notices if you need to show hidden notices again."
-msgstr "Нажмите кнопку \\\"Сбросить скрытые уведомления\\\""
-
-#: admin/options.php:144
-#, php-format
-msgid "Reset hidden notices (%s)"
-msgstr "Сбросить скрытые уведомления (%s)"
-
-#: admin/options.php:146 admin/pages/notices.php:64
-msgid "Hidden notices are successfully reset, now you can see them again!"
-msgstr ""
-"Скрытые уведомления успешно восстановлены, теперь вы можете снова видеть их!"
-
-#: admin/pages/notices.php:40
-msgid "Notices"
-msgstr "Уведомления"
-
-#: admin/pages/notices.php:41
+#: admin/pages/cyrlitera.php:50
 msgid "General"
 msgstr "Основные"
 
-#: disable-admin-notices.php:17
+#: cyrlitera.php:22
 msgid ""
 "We found that you have the \"Clearfy - disable unused features\" plugin "
 "installed, this plugin already has disable comments functions, so you can "
-"deactivate plugin \"Disable admin notices\"!"
+"deactivate plugin \"Cyrilic transliteration\"!"
 msgstr ""
 "Мы обнаружили, что у вас установлен плагин «Clearfy - отключить  "
 "неиспользуемые функции», этот плагин уже имеет функции отключения "
-"комментариев, поэтому вы можете отключить плагин «Скрыть уведомления "
-"администратора»!"
+"комментариев, поэтому вы можете отключить плагин «Транслитерация кириллицы»!"
 
-#: disable-admin-notices.php:82
-msgid "Webcraftic disable admin notices"
-msgstr "Webcraftic отключить уведомления администратора"
+#: cyrlitera.php:80
+msgid "Webcraftic cyrilic transliteration"
+msgstr "Webcraftic транслитерация кириллицы"
 
-#: includes/classes/class.configurate-notices.php:73
-#, php-format
-msgid "Notifications %s"
-msgstr "Уведомления %s"
+#~ msgid "You don't have enough capability to edit this information."
+#~ msgstr "Вы не имеете разрешения на редактирование этого!"
 
-#: includes/classes/class.configurate-notices.php:82
-msgid "Restore notice"
-msgstr "Восстановить уведомление"
+#~ msgid "Undefinded notice id."
+#~ msgstr "Не передан notice id."
 
-#: includes/classes/class.configurate-notices.php:241
-msgid "Hide notification forever"
-msgstr "Скрыть уведомление навсегда"
+#~ msgid "Success"
+#~ msgstr "Успешно"
+
+#~ msgid "Hide admin notices"
+#~ msgstr "Скрыть уведомления"
+
+#~ msgid "Enable hidden notices in adminbar"
+#~ msgstr "Включить уведомления в админбаре"
+
+#~ msgid "Admin notifications, Update nags"
+#~ msgstr "Уведомления администратора, уведомления об обновлении Wordpress"
+
+#~ msgid ""
+#~ "Do you know the situation, when some plugin offers you to update to "
+#~ "premium, to collect technical data and shows many annoying notices? You "
+#~ "are close these notices every now and again but they newly appears and "
+#~ "interfere your work with WordPress. Even worse, some plugin’s authors "
+#~ "delete “close” button from notices and they shows in your admin panel "
+#~ "forever."
+#~ msgstr ""
+#~ "Вам знакома ситуация, когда какой-то плагин просит вас обновиться до "
+#~ "премиум-версии, получить права на сбор данных о вашем сайте и создает "
+#~ "много раздражающих уведомлений? Вы закрываете эти уведомления раз за "
+#~ "разом, но они вновь появляются и мешают вашей работе с WordPress. Хуже "
+#~ "того, некоторые авторы и вовсе удаляют кнопку “закрыть” из уведомлений, и "
+#~ "они висят в шапке вашей панели администратора целую вечность."
+
+#~ msgid "All notices"
+#~ msgstr "Все уведомления"
+
+#~ msgid "Hide all notices globally."
+#~ msgstr "Скрыть все уведомления глобально."
+
+#~ msgid "Only selected"
+#~ msgstr "Только выбранные"
+
+#~ msgid ""
+#~ "Hide selected notices only. You will see the link \"Hide notification "
+#~ "forever\" in each notice. Push it and they will not bother you anymore."
+#~ msgstr ""
+#~ "Скрывать только выбранные уведомления. В каждом уведомлении вы увидите "
+#~ "ссылку \"Скрыть уведомление навсегда\". Нажмите на неё и уведомление "
+#~ "будет скрыто навсегда и перестанет вас беспокоить."
+
+#~ msgid "Don't nide"
+#~ msgstr "Не скрывать"
+
+#~ msgid ""
+#~ "Do not hide notices and do not show “Hide notification forever” link for "
+#~ "admin."
+#~ msgstr ""
+#~ "Не скрывать уведомления и не показывать ссылку \"Скрыть уведомление "
+#~ "навсегда\" в уведомлениях администратора."
+
+#~ msgid ""
+#~ "Some plugins shows notifications about premium version, data collecting "
+#~ "or promote their services. Even if you push close button (that sometimes "
+#~ "are impossible), notices are shows again in some time. This option allows "
+#~ "you to control notices. Hide them all or each individually. Some plugins "
+#~ "shows notifications about premium version, data collecting or promote "
+#~ "their services. Even if you push close button (that sometimes are "
+#~ "impossible), notices are shows again in some time. This option allows you "
+#~ "to control notices. Hide them all or each individually."
+#~ msgstr ""
+#~ "Зачастую, плагины отображают уведомления о возможности перехода на "
+#~ "премиум версию, просят разрешение на сбор данных, рекламируют свои "
+#~ "услуги. Даже если вы нажмете кнопку закрыть (что не всегда возможно), "
+#~ "уведомления всё равно отобразятся через какое-то время. С помощью этой "
+#~ "настройки, вы можете контролировать эти уведомления. Скройте их все сразу "
+#~ "или каждое по отдельности."
+
+#~ msgid ""
+#~ "By default, the plugin hides all notices, which you specified. If you "
+#~ "enable this option, the plugin will collect all hidden notices and show "
+#~ "them into the top admin toolbar. It will not disturb you but will allow "
+#~ "to look notices at your convenience."
+#~ msgstr ""
+#~ "По умолчанию, плагин полностью скрывает отключенные вами уведомления. "
+#~ "Если включить эту опцию, то плагин будет собирать все скрытые вами "
+#~ "уведомления и выводить в верхней панели администратора. Это не будет вас "
+#~ "раздражать, но и позволит просматривать уведомления, когда вам это удобно."
+
+#~ msgid "Push reset hidden notices if you need to show hidden notices again."
+#~ msgstr "Нажмите кнопку \\\"Сбросить скрытые уведомления\\\""
+
+#~ msgid "Reset hidden notices (%s)"
+#~ msgstr "Сбросить скрытые уведомления (%s)"
+
+#~ msgid "Hidden notices are successfully reset, now you can see them again!"
+#~ msgstr ""
+#~ "Скрытые уведомления успешно восстановлены, теперь вы можете снова видеть "
+#~ "их!"
+
+#~ msgid "Notices"
+#~ msgstr "Уведомления"
+
+#~ msgid ""
+#~ "We found that you have the \"Clearfy - disable unused features\" plugin "
+#~ "installed, this plugin already has disable comments functions, so you can "
+#~ "deactivate plugin \"Disable admin notices\"!"
+#~ msgstr ""
+#~ "Мы обнаружили, что у вас установлен плагин «Clearfy - отключить  "
+#~ "неиспользуемые функции», этот плагин уже имеет функции отключения "
+#~ "комментариев, поэтому вы можете отключить плагин «Скрыть уведомления "
+#~ "администратора»!"
+
+#~ msgid "Webcraftic disable admin notices"
+#~ msgstr "Webcraftic отключить уведомления администратора"
+
+#~ msgid "Notifications %s"
+#~ msgstr "Уведомления %s"
+
+#~ msgid "Restore notice"
+#~ msgstr "Восстановить уведомление"
+
+#~ msgid "Hide notification forever"
+#~ msgstr "Скрыть уведомление навсегда"
 
 #~ msgid "Hidden notices"
 #~ msgstr "Скрытые уведомления"
