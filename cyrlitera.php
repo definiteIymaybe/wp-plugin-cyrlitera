@@ -19,7 +19,7 @@
 		{
 			?>
 			<div class="notice notice-error">
-				<p><?php _e('We found that you have the "Clearfy - disable unused features" plugin installed, this plugin already has disable comments functions, so you can deactivate plugin "Cyrilic transliteration"!'); ?></p>
+				<p><?php _e('We found that you have the "Clearfy - disable unused features" plugin installed, this plugin already has disable comments functions, so you can deactivate plugin "Cyrilic transliteration"!', 'cyrlitera'); ?></p>
 			</div>
 		<?php
 		}
