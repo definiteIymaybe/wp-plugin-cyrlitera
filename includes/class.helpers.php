@@ -149,6 +149,7 @@
 			$iso9_table = array_merge($iso9_table, $geo2lat);
 
 			$locale = get_locale();
+
 			switch( $locale ) {
 				case 'bg_BG':
 					$iso9_table['Щ'] = 'SHT';
@@ -174,14 +175,16 @@
 			}
 
 			$term = $is_term
-				? $wpdb->get_var("SELECT slug FROM {$wpdb->terms} WHERE name = '$title'")
+				? $wpdb->get_var($wpdb->prepare("SELECT slug FROM {$wpdb->terms} WHERE name = '%s'", $title))
 				: '';
 
 			if( empty($term) ) {
 				$title = strtr($title, $iso9_table);
+
 				if( function_exists('iconv') ) {
 					$title = iconv('UTF-8', 'UTF-8//TRANSLIT//IGNORE', $title);
 				}
+
 				$title = preg_replace("/[^A-Za-z0-9'_\-\.]/", '-', $title);
 				$title = preg_replace('/\-+/', '-', $title);
 				$title = preg_replace('/^-+/', '', $title);
@@ -193,25 +196,30 @@
 			return $title;
 		}
 
-
 		public static function convertExistingSlugs()
 		{
 			global $wpdb;
 
 			$posts = $wpdb->get_results("SELECT ID, post_name FROM {$wpdb->posts} WHERE post_name REGEXP('[^A-Za-z0-9\-]+') AND post_status IN ('publish', 'future', 'private')");
+
 			foreach((array)$posts as $post) {
 				$sanitized_name = self::sanitizeTitle(urldecode($post->post_name));
+
 				if( $post->post_name != $sanitized_name ) {
+					//todo: Добавить редирект со старых страниц
 					add_post_meta($post->ID, '_wp_old_slug', $post->post_name);
-					$wpdb->update($wpdb->posts, array('post_name' => $sanitized_name), array('ID' => $post->ID));
+
+					$wpdb->update($wpdb->posts, array('post_name' => $sanitized_name), array('ID' => $post->ID), array('%s'), array('%d'));
 				}
 			}
 
 			$terms = $wpdb->get_results("SELECT term_id, slug FROM {$wpdb->terms} WHERE slug REGEXP('[^A-Za-z0-9\-]+') ");
+
 			foreach((array)$terms as $term) {
 				$sanitized_slug = self::sanitizeTitle(urldecode($term->slug));
+
 				if( $term->slug != $sanitized_slug ) {
-					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id));
+					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
 				}
 			}
 		}
