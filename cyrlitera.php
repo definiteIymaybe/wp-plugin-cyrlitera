@@ -1,10 +1,10 @@
 <?php
 	/**
-	 * Plugin Name: Сyrlitera
+	 * Plugin Name: Cyrlitera - transliteration of Cyrillic into Latin alphabet
 	 * Plugin URI: https://wordpress.org/plugins/cyrlitera/
 	 * Description: Disable admin notices plugin gives you the option to hide updates warnings and inline notices in the admin panel.
 	 * Author: Webcraftic <wordpress.webraftic@gmail.com>
-	 * Version: 1.0.0
+	 * Version: 1.0.1
 	 * Text Domain: cyrlitera
 	 * Domain Path: /languages/
 	 */
@@ -78,7 +78,7 @@
 				'prefix' => 'wbcr_cyrlitera_',
 				'plugin_name' => 'wbcr_cyrlitera',
 				'plugin_title' => __('Webcraftic cyrilic transliteration', 'cyrlitera'),
-				'plugin_version' => '1.0.0',
+				'plugin_version' => '1.0.1',
 				'required_php_version' => '5.2',
 				'required_wp_version' => '4.2',
 				'plugin_build' => BUILD_TYPE,

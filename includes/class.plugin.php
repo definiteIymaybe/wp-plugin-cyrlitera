@@ -85,12 +85,7 @@
 			protected function setTextDomain()
 			{
 
-				$relative_path = $this->as_addon
-					? dirname(WCTR_PLUGIN_DIR)
-					: dirname(WCTR_PLUGIN_BASE);
-
-				load_plugin_textdomain('cyrlitera', false, $relative_path . '/languages/');
-
+				load_plugin_textdomain('cyrlitera', false, dirname(WCTR_PLUGIN_BASE) . '/languages/');
 			}
 			
 			protected function setModules()
