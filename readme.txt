@@ -25,6 +25,14 @@ License: GPLv2
 Мы использовали некоторые функции из плагинов:
 <strong>WP Translitera</strong>, <strong>Rus-To-Lat</strong>, <strong>Cyr to Lat</strong>, <strong>Clearfy — плагин для оптимизации WordPress</strong>
 
+#### Recommended separate modules ####
+We invite you to check out a few other related free plugins that our team has also produced that you may find especially useful:
+
+* [Clearfy – WordPress optimization plugin and disable ultimate tweaker](https://wordpress.org/plugins/gonzales/)
+* [Disable updates, Updates manager, Disable automatic updates](https://wordpress.org/plugins/gonzales/)
+* [Disable Comments for Any Post Types (Remove Comments)](https://wordpress.org/plugins/comments-plus/)
+* [Disable updates, Disable automatic updates, Updates manager](https://wordpress.org/plugins/webcraftic-updates-manager/)
+
 == Screenshots ==
 1. Страница настроек
 2. Пример использования для записей

@@ -7,6 +7,7 @@
 	 * Version: 1.0.1
 	 * Text Domain: cyrlitera
 	 * Domain Path: /languages/
+	 * Author URI: http://webcraftic.com
 	 */
 
 	// Exit if accessed directly
