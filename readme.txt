@@ -61,10 +61,11 @@ We used some plugins functions:
 #### RECOMMENDED SEPARATE MODULES ####
 We invite you to check out a few other related free plugins that our team has also produced that you may find especially useful:
 
-* [Clearfy – WordPress optimization plugin and disable ultimate tweaker](https://wordpress.org/plugins/gonzales/)
-* [Disable updates, Updates manager, Disable automatic updates](https://wordpress.org/plugins/gonzales/)
+* [Clearfy – WordPress optimization plugin and disable ultimate tweaker](https://wordpress.org/plugins/clearfy/)
+* [WordPress Assets manager, dequeue scripts, dequeue styles](https://wordpress.org/plugins/gonzales/)
 * [Disable Comments for Any Post Types (Remove Comments)](https://wordpress.org/plugins/comments-plus/)
 * [Disable updates, Disable automatic updates, Updates manager](https://wordpress.org/plugins/webcraftic-updates-manager/)
+* [Disable admin notices individually](https://wordpress.org/plugins/disable-admin-notices/ "Disable admin notices individually")
 
 == Installation ==
 
