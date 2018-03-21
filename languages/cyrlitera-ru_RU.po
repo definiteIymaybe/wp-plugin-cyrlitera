@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: clearfy\n"
-"POT-Creation-Date: 2018-03-14 17:03+0300\n"
-"PO-Revision-Date: 2018-03-14 17:07+0300\n"
+"POT-Creation-Date: 2018-03-21 15:44+0300\n"
+"PO-Revision-Date: 2018-03-21 15:44+0300\n"
 "Last-Translator: alex.kovalevv@gmail.com <alex.kovalevv@gmail.com>\n"
 "Language-Team: Alex Kovalev <alex.kovalevv@gmail.com>\n"
 "Language: ru_RU\n"
@@ -43,7 +43,7 @@ msgstr ""
 msgid "Use transliteration"
 msgstr "Использовать транслитерацию"
 
-#: admin/boot.php:100 admin/options.php:39
+#: admin/boot.php:100 admin/options.php:49
 msgid "Convert file names"
 msgstr "Конвертировать имена файлов"
 
@@ -69,15 +69,28 @@ msgstr ""
 
 #: admin/options.php:32
 msgid ""
-"If you enable this option, the permanent URLs of all previously published "
-"posts and pages will be converted into URLs with Latin characters. All new "
-"pages and posts will also have a URL in the Latin alphabet."
+"If you enable this option, all URLs of new pages, posts, tags, and "
+"categories will automatically be converted to Latin."
 msgstr ""
-"Если включить эту опцию, постоянные URL всех ранее опубликованных записей и "
-"страниц будут преобразованы в URL с латинскими символами. Все новые страницы "
-"и записи, также будут иметь URL на латинице."
+"Если включить эту опцию, все URL новых страниц, записей, меток, рубрик будут "
+"автоматически конвертироваться в латиницу."
+
+#: admin/options.php:39
+msgid "Force transliteration"
+msgstr "Принудильная траслитерация"
 
 #: admin/options.php:41
+#, php-format
+msgid ""
+"If any of your plugins affects transliteration of links, you can use this "
+"option to change the plugin of %s to overwrite the changes of the other "
+"plugins."
+msgstr ""
+"Если какой-то из установленных у вас плагинов влияет на траслитерацию "
+"постоянный ссылок, включите эту опцию, чтобы %s перезаписывал изменения "
+"других плагинов."
+
+#: admin/options.php:51
 msgid ""
 "This option works only for new media library files. All Cyrillic names of "
 "the downloaded files will be converted to names with Latin characters."
@@ -85,6 +98,86 @@ msgstr ""
 "Эта опция работает только для новых файлов медиа библиотеки. Все "
 "кириллические имена загружаемых файлов, будут преобразованы в имена с "
 "латинскими символами."
+
+#: admin/options.php:58
+msgid "Convert file names into lowercase"
+msgstr "Преобразовывать имена файлов в нижний регистр"
+
+#: admin/options.php:60
+msgid ""
+"This function works only for new upload files. Example: File_Name.jpg -> "
+"file_name.jpg"
+msgstr ""
+"Эта функция работает только для новых загружаемых файлов. Пример: File_Name."
+"jpg -> file_name.jpg"
+
+#: admin/options.php:68
+msgid "Redirection old URLs to new ones"
+msgstr "Перенаправление со старых URL на новые"
+
+#: admin/options.php:70
+msgid ""
+"If at the time of the plugin installation you had pages with unconverted "
+"links, use this option to redirect users from old to new URLs with the Latin "
+"alphabet."
+msgstr ""
+"Если на момент установки плагина у вас были страницы с не преобразованными "
+"ссылками, используйте эту опцию, чтобы пользователи, перешедшие по старым "
+"ссылкам, были перенаправлены на новые URL на латинице."
+
+#: admin/options.php:95
+msgid "Character Sets"
+msgstr "Наборы символов"
+
+#: admin/options.php:96
+msgid ""
+"You can supplement current base of transliteration characters. Write pairs "
+"of values in lower case separated by commas. Example:"
+msgstr ""
+"Вы можете дополнить текущую базу символов транслитерации, пишите пары "
+"значений в нижнем регистре через запятую. Пример: ა=a,ბ=b"
+
+#: admin/options.php:186
+msgid ""
+"If at the time of the plugin installation you already had posts, pages, tags "
+"and categories, click on this button and the plugin will automatically "
+"convert URLs into Latin. Attention! Previously uploaded files will not be "
+"converted."
+msgstr ""
+"Если на момент установки плагина у вас уже были созданы записи, страницы, "
+"метки и рубрики, то нажмите на эту кнопку и плагин автоматически преобразует "
+"URLы в латинские. Внимание! Ранее загруженные файлы преобразованы не будут."
+
+#: admin/options.php:195
+msgid "Convert already created posts and categories"
+msgstr "Преобразовать уже созданные записи и рубрики"
+
+#: admin/options.php:197
+msgid "Url of old posts, pages,terms,tags successfully converted into Latin!"
+msgstr ""
+"Url старых записей, страниц, тегов и рубрик были успешно конвертированы в "
+"литинские!"
+
+#: admin/options.php:207
+msgid ""
+"Allows you to restore converted URLs by using the \"Convert already created "
+"posts and categories\" button. This can be useful in case of incorrect URLs "
+"or incorrect transliteration of some characters. You can roll back changes "
+"and advance the character sets above to correct the plugin's work. "
+msgstr ""
+"Позволяет восстановить преобразованные с помощью кнопки “Преобразовать уже "
+"созданные записи и рубрики” URLы. Это может быть полезно в случае появления "
+"некорректных URL адресов или неправильной транслитерации определенных "
+"символов. У вас есть возможность откатить изменения и изменить наборы "
+"символов выше, чтобы скорректировать работу плагина."
+
+#: admin/options.php:216
+msgid "Rollback changes"
+msgstr "Откатить изменения"
+
+#: admin/options.php:218
+msgid "The rollback of new changes was successful!"
+msgstr "Откат новых изменений прошел успешно!"
 
 #: admin/pages/cyrlitera.php:33 admin/pages/cyrlitera.php:49
 msgid "Transliteration"
@@ -94,19 +187,41 @@ msgstr "Транслитерация"
 msgid "General"
 msgstr "Основные"
 
-#: cyrlitera.php:22
+#: cyrlitera.php:23
 msgid ""
 "We found that you have the \"Clearfy - disable unused features\" plugin "
 "installed, this plugin already has disable comments functions, so you can "
-"deactivate plugin \"Cyrilic transliteration\"!"
+"deactivate plugin \"Webcraftic Cyrlitera\"!"
 msgstr ""
 "Мы обнаружили, что у вас установлен плагин «Clearfy - отключить  "
 "неиспользуемые функции», этот плагин уже имеет функции отключения "
-"комментариев, поэтому вы можете отключить плагин «Транслитерация кириллицы»!"
+"комментариев, поэтому вы можете отключить плагин «Webcraftic Cyrlitera»!"
 
-#: cyrlitera.php:80
-msgid "Webcraftic cyrilic transliteration"
-msgstr "Webcraftic транслитерация кириллицы"
+#: cyrlitera.php:81
+msgid "Webcraftic Cyrlitera"
+msgstr "Webcraftic Cyrlitera"
+
+#~ msgid ""
+#~ "We found that you have the \"Clearfy - disable unused features\" plugin "
+#~ "installed, this plugin already has disable comments functions, so you can "
+#~ "deactivate plugin \"Cyrilic transliteration\"!"
+#~ msgstr ""
+#~ "Мы обнаружили, что у вас установлен плагин «Clearfy - отключить  "
+#~ "неиспользуемые функции», этот плагин уже имеет функции отключения "
+#~ "комментариев, поэтому вы можете отключить плагин «Транслитерация "
+#~ "кириллицы»!"
+
+#~ msgid "Webcraftic cyrilic transliteration"
+#~ msgstr "Webcraftic транслитерация кириллицы"
+
+#~ msgid ""
+#~ "If you enable this option, the permanent URLs of all previously published "
+#~ "posts and pages will be converted into URLs with Latin characters. All "
+#~ "new pages and posts will also have a URL in the Latin alphabet."
+#~ msgstr ""
+#~ "Если включить эту опцию, постоянные URL всех ранее опубликованных записей "
+#~ "и страниц будут преобразованы в URL с латинскими символами. Все новые "
+#~ "страницы и записи, также будут иметь URL на латинице."
 
 #~ msgid "You don't have enough capability to edit this information."
 #~ msgstr "Вы не имеете разрешения на редактирование этого!"

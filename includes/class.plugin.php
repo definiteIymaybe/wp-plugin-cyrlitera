@@ -84,7 +84,7 @@
 
 			protected function setTextDomain()
 			{
-				// Localization plugin
+
 				load_plugin_textdomain('cyrlitera', false, dirname(WCTR_PLUGIN_BASE) . '/languages/');
 			}
 			
@@ -97,6 +97,14 @@
 						array('libs/factory/pages', 'factory_pages_000', 'admin'),
 						array('libs/factory/clearfy', 'factory_clearfy_000', 'all')
 					));
+				}
+			}
+
+			protected function initActivation()
+			{
+				if( !$this->as_addon ) {
+					include_once(WCTR_PLUGIN_DIR . '/admin/activation.php');
+					self::app()->registerActivation('WCTR_Activation');
 				}
 			}
 
@@ -115,7 +123,7 @@
 				require_once(WCTR_PLUGIN_DIR . '/admin/boot.php');
 				require_once(WCTR_PLUGIN_DIR . '/admin/options.php');
 
-				//$this->initActivation();
+				$this->initActivation();
 				$this->registerPages();
 			}
 			
