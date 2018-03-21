@@ -14,156 +14,36 @@
 
 	class WCTR_Helper {
 
+		public static function transliterate($title, $ignore_special_symbols = false)
+		{
+			$origin_title = $title;
+			$iso9_table = self::getSymbolsPack();
+
+			$title = strtr($title, $iso9_table);
+
+			if( function_exists('iconv') ) {
+				$title = iconv('UTF-8', 'UTF-8//TRANSLIT//IGNORE', $title);
+			}
+
+			if( !$ignore_special_symbols ) {
+				$title = preg_replace("/[^A-Za-z0-9'_\-\.]/", '-', $title);
+				$title = preg_replace('/\-+/', '-', $title);
+				$title = preg_replace('/^-+/', '', $title);
+				$title = preg_replace('/-+$/', '', $title);
+			}
+
+			return apply_filters('wbcr_cyrlitera_transliterate', $title, $origin_title, $iso9_table);
+		}
+
+		/**
+		 * @param string $title обработанный заголовок
+		 * @return mixed|void
+		 */
 		public static function sanitizeTitle($title)
 		{
 			global $wpdb;
 
-			$iso9_table = array(
-				'А' => 'A',
-				'Б' => 'B',
-				'В' => 'V',
-				'Г' => 'G',
-				'Ѓ' => 'G',
-				'Ґ' => 'G',
-				'Д' => 'D',
-				'Е' => 'E',
-				'Ё' => 'YO',
-				'Є' => 'YE',
-				'Ж' => 'ZH',
-				'З' => 'Z',
-				'Ѕ' => 'Z',
-				'И' => 'I',
-				'Й' => 'J',
-				'Ј' => 'J',
-				'І' => 'I',
-				'Ї' => 'YI',
-				'К' => 'K',
-				'Ќ' => 'K',
-				'Л' => 'L',
-				'Љ' => 'L',
-				'М' => 'M',
-				'Н' => 'N',
-				'Њ' => 'N',
-				'О' => 'O',
-				'П' => 'P',
-				'Р' => 'R',
-				'С' => 'S',
-				'Т' => 'T',
-				'У' => 'U',
-				'Ў' => 'U',
-				'Ф' => 'F',
-				'Х' => 'H',
-				'Ц' => 'TS',
-				'Ч' => 'CH',
-				'Џ' => 'DH',
-				'Ш' => 'SH',
-				'Щ' => 'SHH',
-				'Ъ' => '',
-				'Ы' => 'Y',
-				'Ь' => '',
-				'Э' => 'E',
-				'Ю' => 'YU',
-				'Я' => 'YA',
-				'а' => 'a',
-				'б' => 'b',
-				'в' => 'v',
-				'г' => 'g',
-				'ѓ' => 'g',
-				'ґ' => 'g',
-				'д' => 'd',
-				'е' => 'e',
-				'ё' => 'yo',
-				'є' => 'ye',
-				'ж' => 'zh',
-				'з' => 'z',
-				'ѕ' => 'z',
-				'и' => 'i',
-				'й' => 'j',
-				'ј' => 'j',
-				'і' => 'i',
-				'ї' => 'yi',
-				'к' => 'k',
-				'ќ' => 'k',
-				'л' => 'l',
-				'љ' => 'l',
-				'м' => 'm',
-				'н' => 'n',
-				'њ' => 'n',
-				'о' => 'o',
-				'п' => 'p',
-				'р' => 'r',
-				'с' => 's',
-				'т' => 't',
-				'у' => 'u',
-				'ў' => 'u',
-				'ф' => 'f',
-				'х' => 'h',
-				'ц' => 'ts',
-				'ч' => 'ch',
-				'џ' => 'dh',
-				'ш' => 'sh',
-				'щ' => 'shh',
-				'ъ' => '',
-				'ы' => 'y',
-				'ь' => '',
-				'э' => 'e',
-				'ю' => 'yu',
-				'я' => 'ya',
-			);
-			$geo2lat = array(
-				'ა' => 'a',
-				'ბ' => 'b',
-				'გ' => 'g',
-				'დ' => 'd',
-				'ე' => 'e',
-				'ვ' => 'v',
-				'ზ' => 'z',
-				'თ' => 'th',
-				'ი' => 'i',
-				'კ' => 'k',
-				'ლ' => 'l',
-				'მ' => 'm',
-				'ნ' => 'n',
-				'ო' => 'o',
-				'პ' => 'p',
-				'ჟ' => 'zh',
-				'რ' => 'r',
-				'ს' => 's',
-				'ტ' => 't',
-				'უ' => 'u',
-				'ფ' => 'ph',
-				'ქ' => 'q',
-				'ღ' => 'gh',
-				'ყ' => 'qh',
-				'შ' => 'sh',
-				'ჩ' => 'ch',
-				'ც' => 'ts',
-				'ძ' => 'dz',
-				'წ' => 'ts',
-				'ჭ' => 'tch',
-				'ხ' => 'kh',
-				'ჯ' => 'j',
-				'ჰ' => 'h'
-			);
-
-			$iso9_table = array_merge($iso9_table, $geo2lat);
-
-			$locale = get_locale();
-
-			switch( $locale ) {
-				case 'bg_BG':
-					$iso9_table['Щ'] = 'SHT';
-					$iso9_table['щ'] = 'sht';
-					$iso9_table['Ъ'] = 'A';
-					$iso9_table['ъ'] = 'a';
-					break;
-				case 'uk':
-				case 'uk_ua':
-				case 'uk_UA':
-					$iso9_table['И'] = 'Y';
-					$iso9_table['и'] = 'y';
-					break;
-			}
+			$origin_title = $title;
 
 			$is_term = false;
 			$backtrace = debug_backtrace();
@@ -179,48 +59,197 @@
 				: '';
 
 			if( empty($term) ) {
-				$title = strtr($title, $iso9_table);
-
-				if( function_exists('iconv') ) {
-					$title = iconv('UTF-8', 'UTF-8//TRANSLIT//IGNORE', $title);
-				}
-
-				$title = preg_replace("/[^A-Za-z0-9'_\-\.]/", '-', $title);
-				$title = preg_replace('/\-+/', '-', $title);
-				$title = preg_replace('/^-+/', '', $title);
-				$title = preg_replace('/-+$/', '', $title);
+				$title = self::transliterate($title);
 			} else {
 				$title = $term;
 			}
 
-			return $title;
+			return apply_filters('wbcr_cyrlitera_sanitize_title', $title, $origin_title);
 		}
 
-		public static function convertExistingSlugs()
+		/**
+		 * @return array
+		 */
+		public static function getSymbolsPack()
 		{
-			global $wpdb;
+			$loc = get_locale();
+			//$ret = array();
 
-			$posts = $wpdb->get_results("SELECT ID, post_name FROM {$wpdb->posts} WHERE post_name REGEXP('[^A-Za-z0-9\-]+') AND post_status IN ('publish', 'future', 'private')");
+			//$is_cyrilic = in_array($loc, array('ru_RU', 'bel', 'kk', 'uk', 'bg', 'bg_BG', 'ka_GE'));
 
-			foreach((array)$posts as $post) {
-				$sanitized_name = self::sanitizeTitle(urldecode($post->post_name));
+			//if( $is_cyrilic ) {
+			$ret = array(
+				'А' => 'A',
+				'а' => 'a',
+				'Б' => 'B',
+				'б' => 'b',
+				'В' => 'V',
+				'в' => 'v',
+				'Г' => 'G',
+				'г' => 'g',
+				'Д' => 'D',
+				'д' => 'd',
+				'Е' => 'E',
+				'е' => 'e',
+				'Ё' => 'Jo',
+				'ё' => 'jo',
+				'Ж' => 'Zh',
+				'ж' => 'zh',
+				'З' => 'Z',
+				'з' => 'z',
+				'И' => 'I',
+				'и' => 'i',
+				'Й' => 'J',
+				'й' => 'j',
+				'К' => 'K',
+				'к' => 'k',
+				'Л' => 'L',
+				'л' => 'l',
+				'М' => 'M',
+				'м' => 'm',
+				'Н' => 'N',
+				'н' => 'n',
+				'О' => 'O',
+				'о' => 'o',
+				'П' => 'P',
+				'п' => 'p',
+				'Р' => 'R',
+				'р' => 'r',
+				'С' => 'S',
+				'с' => 's',
+				'Т' => 'T',
+				'т' => 't',
+				'У' => 'U',
+				'у' => 'u',
+				'Ф' => 'F',
+				'ф' => 'f',
+				'Х' => 'H',
+				'х' => 'h',
+				'Ц' => 'C',
+				'ц' => 'c',
+				'Ч' => 'Ch',
+				'ч' => 'ch',
+				'Ш' => 'Sh',
+				'ш' => 'sh',
+				'Щ' => 'Shh',
+				'щ' => 'shh',
+				'Ъ' => '',
+				'ъ' => '',
+				'Ы' => 'Y',
+				'ы' => 'y',
+				'Ь' => '',
+				'ь' => '',
+				'Э' => 'Je',
+				'э' => 'je',
+				'Ю' => 'Ju',
+				'ю' => 'ju',
+				'Я' => 'Ja',
+				'я' => 'ja',
+				'Ґ' => 'G',
+				'ґ' => 'g',
+				'Є' => 'Ie',
+				'є' => 'ie',
+				'І' => 'I',
+				'і' => 'i',
+				'Ї' => 'I',
+				'ї' => 'i'
+			);
+			//}
 
-				if( $post->post_name != $sanitized_name ) {
-					//todo: Добавить редирект со старых страниц
-					add_post_meta($post->ID, '_wp_old_slug', $post->post_name);
+			//Украинская локализация
+			if( $loc == 'uk' ) {
+				$ret = array_merge($ret, array(
+					'Г' => 'H',
+					'г' => 'h',
+					'И' => 'Y',
+					'и' => 'y',
+					'Й' => 'I',
+					'й' => 'i',
+					'Х' => 'Kh',
+					'х' => 'kh',
+					'Ц' => 'Ts',
+					'ц' => 'ts',
+					'Щ' => 'Shch',
+					'щ' => 'shch',
+					'Ю' => 'Iu',
+					'ю' => 'iu',
+					'Я' => 'Ia',
+					'я' => 'ia'
+				));
+				//bulgarian locale
+			} elseif( $loc == 'bg' || $loc == 'bg_BG' ) {
+				$ret = array_merge($ret, array(
+					'Щ' => 'Sht',
+					'щ' => 'sht',
+					'Ъ' => 'a',
+					'ъ' => 'a'
+				));
+			}
 
-					$wpdb->update($wpdb->posts, array('post_name' => $sanitized_name), array('ID' => $post->ID), array('%s'), array('%d'));
+			if( $loc == 'ka_GE' ) {
+				$ret = array(
+					'ა' => 'a',
+					'ბ' => 'b',
+					'გ' => 'g',
+					'დ' => 'd',
+					'ე' => 'e',
+					'ვ' => 'v',
+					'ზ' => 'z',
+					'თ' => 'th',
+					'ი' => 'i',
+					'კ' => 'k',
+					'ლ' => 'l',
+					'მ' => 'm',
+					'ნ' => 'n',
+					'ო' => 'o',
+					'პ' => 'p',
+					'ჟ' => 'zh',
+					'რ' => 'r',
+					'ს' => 's',
+					'ტ' => 't',
+					'უ' => 'u',
+					'ფ' => 'ph',
+					'ქ' => 'q',
+					'ღ' => 'gh',
+					'ყ' => 'qh',
+					'შ' => 'sh',
+					'ჩ' => 'ch',
+					'ც' => 'ts',
+					'ძ' => 'dz',
+					'წ' => 'ts',
+					'ჭ' => 'tch',
+					'ხ' => 'kh',
+					'ჯ' => 'j',
+					'ჰ' => 'h'
+				);
+			}
+
+			$custom_rules = WCTR_Plugin::app()->getOption('custom_symbols_pack');
+
+			if( !empty($custom_rules) ) {
+				$split_rules = explode(',', $custom_rules);
+				$split_rules = array_map('trim', $split_rules);
+
+				foreach($split_rules as $rule) {
+					$split_symbols = explode('=', $rule);
+
+					if( sizeof($split_symbols) === 2 ) {
+						if( empty($split_symbols[0]) ) {
+							continue;
+						}
+
+						$sss = $split_symbols[0];
+						$ret[$sss] = $split_symbols[1];
+
+						if( strlen($split_symbols[1]) > 0 ) {
+							$ret[mb_strtoupper($split_symbols[0], 'UTF-8')] = mb_strtoupper($split_symbols[1]{0}, 'UTF-8') . substr($split_symbols[1], 1);
+						} else {
+							$ret[mb_strtoupper($split_symbols[0], 'UTF-8')] = $split_symbols[1];
+						}
+					}
 				}
 			}
 
-			$terms = $wpdb->get_results("SELECT term_id, slug FROM {$wpdb->terms} WHERE slug REGEXP('[^A-Za-z0-9\-]+') ");
-
-			foreach((array)$terms as $term) {
-				$sanitized_slug = self::sanitizeTitle(urldecode($term->slug));
-
-				if( $term->slug != $sanitized_slug ) {
-					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
-				}
-			}
+			return apply_filters('wbcr_cyrlitera_default_symbols_pack', $ret);
 		}
 	}

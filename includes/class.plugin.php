@@ -100,6 +100,14 @@
 				}
 			}
 
+			protected function initActivation()
+			{
+				if( !$this->as_addon ) {
+					include_once(WCTR_PLUGIN_DIR . '/admin/activation.php');
+					self::app()->registerActivation('WCTR_Activation');
+				}
+			}
+
 			private function registerPages()
 			{
 				if( $this->as_addon ) {
@@ -115,6 +123,7 @@
 				require_once(WCTR_PLUGIN_DIR . '/admin/boot.php');
 				require_once(WCTR_PLUGIN_DIR . '/admin/options.php');
 
+				$this->initActivation();
 				$this->registerPages();
 			}
 			

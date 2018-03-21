@@ -50,7 +50,7 @@
 				: __('General', 'cyrlitera');
 		}
 
-		protected function afterFormSave()
+		/*protected function afterFormSave()
 		{
 			$use_transliterations = $this->plugin->getOption('use_transliterations');
 			$transliterate_existing_slugs = $this->plugin->getOption('transliterate_existing_slugs');
@@ -60,7 +60,7 @@
 			}
 			WCTR_Helper::convertExistingSlugs();
 			$this->plugin->updateOption('transliterate_existing_slugs', 1);
-		}
+		}*/
 
 		/**
 		 * Permalinks options.

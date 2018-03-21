@@ -14,6 +14,40 @@
 	/**
 	 * @return array
 	 */
+	function wbcr_cyrlitera_install_conflict_plugins()
+	{
+		$install_plugins = array();
+
+		if( is_plugin_active('wp-translitera/wp-translitera.php') ) {
+			$install_plugins[] = 'WP Translitera';
+		}
+
+		if( is_plugin_active('cyr3lat/cyr-to-lat.php') ) {
+			$install_plugins[] = 'Cyr to Lat enhanced';
+		}
+
+		if( is_plugin_active('cyr2lat/cyr-to-lat.php') ) {
+			$install_plugins[] = 'Cyr to Lat';
+		}
+
+		if( is_plugin_active('cyr-and-lat/cyr-and-lat.php') ) {
+			$install_plugins[] = 'Cyr-And-Lat';
+		}
+
+		if( is_plugin_active('rustolat/rus-to-lat.php') ) {
+			$install_plugins[] = 'RusToLat';
+		}
+
+		if( is_plugin_active('rus-to-lat-advanced/ru-translit.php') ) {
+			$install_plugins[] = 'Rus filename and link translit';
+		}
+
+		return $install_plugins;
+	}
+
+	/**
+	 * @return array
+	 */
 	function wbcr_cyrlitera_get_conflict_notices_error()
 	{
 		$notices = array();
@@ -22,28 +56,12 @@
 		$default_notice = $plugin_title . ': ' . __('We found that you have the plugin %s installed. The functions of this plugin already exist in %s. Please deactivate plugin %s to avoid conflicts between plugins functions.', 'cyrlitera');
 		$default_notice .= ' ' . __('If you do not want to deactivate the plugin %s for some reason, we strongly recommend do not use the same plugins functions at the same time!', 'cyrlitera');
 
-		if( is_plugin_active('wp-translitera/wp-translitera.php') ) {
-			$notices[] = sprintf($default_notice, 'WP Translitera', $plugin_title, 'WP Translitera', 'WP Translitera');
-		}
+		$install_conflict_plugins = wbcr_cyrlitera_install_conflict_plugins();
 
-		if( is_plugin_active('cyr3lat/cyr-to-lat.php') ) {
-			$notices[] = sprintf($default_notice, 'Cyr to Lat enhanced', $plugin_title, 'Cyr to Lat enhanced', 'Cyr to Lat enhanced');
-		}
-
-		if( is_plugin_active('cyr2lat/cyr-to-lat.php') ) {
-			$notices[] = sprintf($default_notice, 'Cyr to Lat', $plugin_title, 'Cyr to Lat', 'Cyr to Lat');
-		}
-
-		if( is_plugin_active('cyr-and-lat/cyr-and-lat.php') ) {
-			$notices[] = sprintf($default_notice, 'Cyr-And-Lat', $plugin_title, 'Cyr-And-Lat', 'Cyr-And-Lat');
-		}
-
-		if( is_plugin_active('rustolat/rus-to-lat.php') ) {
-			$notices[] = sprintf($default_notice, 'RusToLat', $plugin_title, 'RusToLat', 'RusToLat');
-		}
-
-		if( is_plugin_active('rus-to-lat-advanced/ru-translit.php') ) {
-			$notices[] = sprintf($default_notice, 'Rus filename and link translit', $plugin_title, 'Rus filename and link translit', 'Rus filename and link translit');
+		if( !empty($install_conflict_plugins) ) {
+			foreach((array)$install_conflict_plugins as $plugin_name) {
+				$notices[] = sprintf($default_notice, $plugin_name, $plugin_title, $plugin_name, $plugin_name);
+			}
 		}
 
 		return $notices;
@@ -75,29 +93,67 @@
 
 	add_action('admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error');
 
+	/**
+	 * Виджет отзывов
+	 *
+	 * @param string $page_url
+	 * @param string $plugin_name
+	 * @return string
+	 */
 	function wbcr_cyrlitera_rating_widget_url($page_url, $plugin_name)
 	{
 		if( $plugin_name == WCTR_Plugin::app()->getPluginName() ) {
-			return 'https://goo.gl/68ucHp';
+			return 'https://goo.gl/ecaj2V';
 		}
 
 		return $page_url;
 	}
 
-	add_filter('wbcr_factory_imppage_rating_widget_url', 'wbcr_cyrlitera_rating_widget_url', 10, 2);
+	add_filter('wbcr_factory_pages_000_imppage_rating_widget_url', 'wbcr_cyrlitera_rating_widget_url', 10, 2);
 
 	function wbcr_cyrlitera_group_options($options)
 	{
+		$install_conflict_plugins = wbcr_cyrlitera_install_conflict_plugins();
+
+		if( !empty($install_conflict_plugins) ) {
+			$tags = array();
+		} else {
+			$tags = array('recommended', 'seo_optimize');
+		}
+
 		$options[] = array(
-			'name' => 'use_transliterations',
+			'name' => 'use_transliteration',
 			'title' => __('Use transliteration', 'cyrlitera'),
-			'tags' => array(),
-			'values' => array('hide_admin_notices' => 'only_selected')
+			'tags' => $tags
 		);
 
 		$options[] = array(
-			'name' => 'use_transliterations_filename',
+			'name' => 'use_force_transliteration',
+			'title' => __('Force transliteration', 'cyrlitera'),
+			'tags' => array()
+		);
+
+		$options[] = array(
+			'name' => 'use_transliteration_filename',
 			'title' => __('Convert file names', 'cyrlitera'),
+			'tags' => $tags
+		);
+
+		$options[] = array(
+			'name' => 'filename_to_lowercase',
+			'title' => __('Convert file names into lowercase', 'cyrlitera'),
+			'tags' => $tags
+		);
+
+		$options[] = array(
+			'name' => 'redirect_from_old_urls',
+			'title' => __('Redirection old URLs to new ones', 'cyrlitera'),
+			'tags' => array()
+		);
+
+		$options[] = array(
+			'name' => 'custom_symbols_pack',
+			'title' => __('Character Sets', 'cyrlitera'),
 			'tags' => array()
 		);
 
