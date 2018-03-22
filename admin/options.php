@@ -35,20 +35,20 @@
 		$options[] = array(
 			'type' => 'checkbox',
 			'way' => 'buttons',
-			'name' => 'use_force_transliteration',
-			'title' => __('Force transliteration', 'cyrlitera'),
-			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'grey'),
-			'hint' => sprintf(__('If any of your plugins affects transliteration of links, you can use this option to change the plugin of %s to overwrite the changes of the other plugins.', 'cyrlitera'), WCTR_Plugin::app()
-				->getPluginTitle()),
+			'name' => 'use_transliteration_filename',
+			'title' => __('Convert file names', 'cyrlitera'),
+			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'green'),
+			'hint' => __('This option works only for new media library files. All Cyrillic names of the downloaded files will be converted to names with Latin characters.', 'cyrlitera'),
 			'default' => false
 		);
 		$options[] = array(
 			'type' => 'checkbox',
 			'way' => 'buttons',
-			'name' => 'use_transliteration_filename',
-			'title' => __('Convert file names', 'cyrlitera'),
-			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'green'),
-			'hint' => __('This option works only for new media library files. All Cyrillic names of the downloaded files will be converted to names with Latin characters.', 'cyrlitera'),
+			'name' => 'use_force_transliteration',
+			'title' => __('Force transliteration', 'cyrlitera'),
+			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'grey'),
+			'hint' => sprintf(__('If any of your plugins affects transliteration of links and file names, you can use this option to change the plugin of %s to overwrite the changes of the other plugins.', 'cyrlitera'), WCTR_Plugin::app()
+				->getPluginTitle()),
 			'default' => false
 		);
 		$options[] = array(

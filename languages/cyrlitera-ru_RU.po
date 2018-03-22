@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: clearfy\n"
-"POT-Creation-Date: 2018-03-21 15:44+0300\n"
-"PO-Revision-Date: 2018-03-21 15:44+0300\n"
+"POT-Creation-Date: 2018-03-22 13:05+0300\n"
+"PO-Revision-Date: 2018-03-22 13:06+0300\n"
 "Last-Translator: alex.kovalevv@gmail.com <alex.kovalevv@gmail.com>\n"
 "Language-Team: Alex Kovalev <alex.kovalevv@gmail.com>\n"
 "Language: ru_RU\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: libs\n"
 
-#: admin/boot.php:22
+#: admin/boot.php:56
 #, php-format
 msgid ""
 "We found that you have the plugin %s installed. The functions of this plugin "
@@ -29,7 +29,7 @@ msgstr ""
 "есть в %s. Пожалуйста, деактивируйте плагин %s во избежание конфликтов между "
 "функциями плагинов."
 
-#: admin/boot.php:23
+#: admin/boot.php:57
 #, php-format
 msgid ""
 "If you do not want to deactivate the plugin %s for some reason, we strongly "
@@ -39,15 +39,31 @@ msgstr ""
 "настоятельно рекомендуем не использовать похожие функции плагинов "
 "одновременно!"
 
-#: admin/boot.php:93 admin/options.php:30
+#: admin/boot.php:126 admin/options.php:30
 msgid "Use transliteration"
 msgstr "Использовать транслитерацию"
 
-#: admin/boot.php:100 admin/options.php:49
+#: admin/boot.php:132 admin/options.php:48
+msgid "Force transliteration"
+msgstr "Принудильная траслитерация"
+
+#: admin/boot.php:138 admin/options.php:39
 msgid "Convert file names"
 msgstr "Конвертировать имена файлов"
 
-#: admin/boot.php:112
+#: admin/boot.php:144 admin/options.php:58
+msgid "Convert file names into lowercase"
+msgstr "Преобразовывать имена файлов в нижний регистр"
+
+#: admin/boot.php:150 admin/options.php:68
+msgid "Redirection old URLs to new ones"
+msgstr "Перенаправление со старых URL на новые"
+
+#: admin/boot.php:156 admin/options.php:95
+msgid "Character Sets"
+msgstr "Наборы символов"
+
+#: admin/boot.php:168
 msgid "Get ultimate plugin free"
 msgstr "Получите полную версию плагина бесплатно"
 
@@ -75,22 +91,7 @@ msgstr ""
 "Если включить эту опцию, все URL новых страниц, записей, меток, рубрик будут "
 "автоматически конвертироваться в латиницу."
 
-#: admin/options.php:39
-msgid "Force transliteration"
-msgstr "Принудильная траслитерация"
-
 #: admin/options.php:41
-#, php-format
-msgid ""
-"If any of your plugins affects transliteration of links, you can use this "
-"option to change the plugin of %s to overwrite the changes of the other "
-"plugins."
-msgstr ""
-"Если какой-то из установленных у вас плагинов влияет на траслитерацию "
-"постоянный ссылок, включите эту опцию, чтобы %s перезаписывал изменения "
-"других плагинов."
-
-#: admin/options.php:51
 msgid ""
 "This option works only for new media library files. All Cyrillic names of "
 "the downloaded files will be converted to names with Latin characters."
@@ -99,9 +100,16 @@ msgstr ""
 "кириллические имена загружаемых файлов, будут преобразованы в имена с "
 "латинскими символами."
 
-#: admin/options.php:58
-msgid "Convert file names into lowercase"
-msgstr "Преобразовывать имена файлов в нижний регистр"
+#: admin/options.php:50
+#, php-format
+msgid ""
+"If any of your plugins affects transliteration of links and file names, you "
+"can use this option to change the plugin of %s to overwrite the changes of "
+"the other plugins."
+msgstr ""
+"Если какой-то из установленных у вас плагинов влияет на траслитерацию "
+"постоянный ссылок и файловых имен, включите эту опцию, чтобы %s "
+"перезаписывал изменения других плагинов."
 
 #: admin/options.php:60
 msgid ""
@@ -110,10 +118,6 @@ msgid ""
 msgstr ""
 "Эта функция работает только для новых загружаемых файлов. Пример: File_Name."
 "jpg -> file_name.jpg"
-
-#: admin/options.php:68
-msgid "Redirection old URLs to new ones"
-msgstr "Перенаправление со старых URL на новые"
 
 #: admin/options.php:70
 msgid ""
@@ -124,10 +128,6 @@ msgstr ""
 "Если на момент установки плагина у вас были страницы с не преобразованными "
 "ссылками, используйте эту опцию, чтобы пользователи, перешедшие по старым "
 "ссылкам, были перенаправлены на новые URL на латинице."
-
-#: admin/options.php:95
-msgid "Character Sets"
-msgstr "Наборы символов"
 
 #: admin/options.php:96
 msgid ""
@@ -200,6 +200,15 @@ msgstr ""
 #: cyrlitera.php:81
 msgid "Webcraftic Cyrlitera"
 msgstr "Webcraftic Cyrlitera"
+
+#~ msgid ""
+#~ "If any of your plugins affects transliteration of links, you can use this "
+#~ "option to change the plugin of %s to overwrite the changes of the other "
+#~ "plugins."
+#~ msgstr ""
+#~ "Если какой-то из установленных у вас плагинов влияет на траслитерацию "
+#~ "постоянный ссылок, включите эту опцию, чтобы %s перезаписывал изменения "
+#~ "других плагинов."
 
 #~ msgid ""
 #~ "We found that you have the \"Clearfy - disable unused features\" plugin "
