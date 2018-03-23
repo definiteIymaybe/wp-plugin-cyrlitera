@@ -71,7 +71,7 @@
 			'default' => false
 		);
 
-		$defaut_symbols_string = '';
+		/*$defaut_symbols_string = '';
 		$defaut_symbols = WCTR_Helper::getSymbolsPack();
 		$symbol_exists = array();
 
@@ -86,7 +86,7 @@
 			$symbol_exists[] = $symbol_name;
 		}
 
-		$defaut_symbols_string = rtrim($defaut_symbols_string, ',');
+		$defaut_symbols_string = rtrim($defaut_symbols_string, ',');*/
 
 		$options[] = array(
 			'type' => 'textarea',
@@ -94,7 +94,7 @@
 			'name' => 'custom_symbols_pack',
 			'title' => __('Character Sets', 'cyrlitera'),
 			'hint' => __('You can supplement current base of transliteration characters. Write pairs of values in lower case separated by commas. Example:', 'cyrlitera') . '<b>ა=a,ბ=b</b>',
-			'default' => $defaut_symbols_string
+			//'default' => $defaut_symbols_string
 		);
 
 		$options[] = array(
@@ -124,24 +124,24 @@
 					LEFT JOIN {$wpdb->postmeta} m
 					ON p.ID = m.post_id
 					WHERE p.post_status
-					IN ('publish', 'future', 'private') AND m.meta_key='wbcr_cyrlitera_wp_old_slug' AND m.meta_value IS NOT NULL");
+					IN ('publish', 'future', 'private') AND m.meta_key='wbcr_wp_old_slug' AND m.meta_value IS NOT NULL");
 
 			foreach((array)$posts as $post) {
 				if( $post->post_name != $post->old_post_name ) {
 					$wpdb->update($wpdb->posts, array('post_name' => $post->old_post_name), array('ID' => $post->ID), array('%s'), array('%d'));
-					delete_post_meta($post->ID, 'wbcr_cyrlitera_wp_old_slug');
+					delete_post_meta($post->ID, 'wbcr_wp_old_slug');
 				}
 			}
 
 			$terms = $wpdb->get_results("SELECT t.term_id, t.slug, o.option_value as old_term_slug FROM {$wpdb->terms} t
 					LEFT JOIN {$wpdb->options} o
-					ON o.option_name=concat('wbcr_cyrlitera_wp_term_',t.term_id, '_old_slug')
+					ON o.option_name=concat('wbcr_wp_term_',t.term_id, '_old_slug')
 					WHERE o.option_value IS NOT NULL");
 
 			foreach((array)$terms as $term) {
 				if( $term->slug != $term->old_term_slug ) {
 					$wpdb->update($wpdb->terms, array('slug' => $term->old_term_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
-					WCTR_Plugin::app()->deleteOption('wp_term_' . $term->term_id . '_old_slug');
+					delete_option('wbcr_wp_term_' . $term->term_id . '_old_slug');
 				}
 			}
 
@@ -159,7 +159,7 @@
 				$sanitized_name = WCTR_Helper::sanitizeTitle(urldecode($post->post_name));
 
 				if( $post->post_name != $sanitized_name ) {
-					add_post_meta($post->ID, 'wbcr_cyrlitera_wp_old_slug', $post->post_name);
+					add_post_meta($post->ID, 'wbcr_wp_old_slug', $post->post_name);
 
 					$wpdb->update($wpdb->posts, array('post_name' => $sanitized_name), array('ID' => $post->ID), array('%s'), array('%d'));
 				}
@@ -171,7 +171,7 @@
 				$sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($term->slug));
 
 				if( $term->slug != $sanitized_slug ) {
-					WCTR_Plugin::app()->updateOption('wp_term_' . $term->term_id . '_old_slug', $term->slug);
+					update_option('wbcr_wp_term_' . $term->term_id . '_old_slug', $term->slug);
 					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
 				}
 			}
