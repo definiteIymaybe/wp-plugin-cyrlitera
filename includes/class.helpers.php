@@ -73,12 +73,9 @@
 		public static function getSymbolsPack()
 		{
 			$loc = get_locale();
-			//$ret = array();
 
-			//$is_cyrilic = in_array($loc, array('ru_RU', 'bel', 'kk', 'uk', 'bg', 'bg_BG', 'ka_GE'));
-
-			//if( $is_cyrilic ) {
 			$ret = array(
+				// russian
 				'А' => 'A',
 				'а' => 'a',
 				'Б' => 'B',
@@ -145,6 +142,7 @@
 				'ю' => 'ju',
 				'Я' => 'Ja',
 				'я' => 'ja',
+				// global
 				'Ґ' => 'G',
 				'ґ' => 'g',
 				'Є' => 'Ie',
@@ -152,21 +150,22 @@
 				'І' => 'I',
 				'і' => 'i',
 				'Ї' => 'I',
-				'ї' => 'i'
+				'ї' => 'i',
+				'Ї' => 'i',
+				'ї' => 'i',
+				'Ё' => 'Jo',
+				'ё' => 'jo',
+				'й' => 'i',
+				'Й' => 'I'
 			);
-			//}
 
-			//Украинская локализация
+			// ukrainian
 			if( $loc == 'uk' ) {
 				$ret = array_merge($ret, array(
-					'Ё' => 'Jo',
-					'ё' => 'jo',
 					'Г' => 'H',
 					'г' => 'h',
 					'И' => 'Y',
 					'и' => 'y',
-					'Й' => 'I',
-					'й' => 'i',
 					'Х' => 'Kh',
 					'х' => 'kh',
 					'Ц' => 'Ts',
@@ -177,10 +176,9 @@
 					'ю' => 'iu',
 					'Я' => 'Ia',
 					'я' => 'ia',
-					'Ї' => 'i',
-					'ї' => 'i'
+
 				));
-				//bulgarian locale
+				//bulgarian
 			} elseif( $loc == 'bg' || $loc == 'bg_BG' ) {
 				$ret = array_merge($ret, array(
 					'Щ' => 'Sht',

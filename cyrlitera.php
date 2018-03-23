@@ -83,7 +83,7 @@
 				'required_php_version' => '5.2',
 				'required_wp_version' => '4.2',
 				'plugin_build' => BUILD_TYPE,
-				//'updates' => WCTR_PLUGIN_DIR . '/updates/'
+				'updates' => WCTR_PLUGIN_DIR . '/updates/'
 			));
 		}
 	}

@@ -89,6 +89,10 @@ There is a "Rollback changes" button in the plugin settings. This option works o
 2. Simple for filenames
 
 == Changelog ==
+= 1.0.4 =
+Fixed: Bug with transliteration of file names
+Added: Compatibility with PHP 7.2
+Added: Forced transliteration for file names
 = 1.0.3 =
 * Fixed: Small bugs
 = 1.0.2 =
@@ -98,7 +102,6 @@ There is a "Rollback changes" button in the plugin settings. This option works o
 * Added: Ability to change the base of symbols of transliteration
 * Added: Button for converting old posts, categories, tags
 * Added: Button to restore old links
-
 = 1.0.1 =
 * Fixed small bugs
 = 1.0.0 =
