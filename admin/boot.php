@@ -114,8 +114,9 @@
 	function wbcr_cyrlitera_group_options($options)
 	{
 		$install_conflict_plugins = wbcr_cyrlitera_install_conflict_plugins();
+		$is_cyrilic = in_array(get_locale(), array('ru_RU', 'bel', 'kk', 'uk', 'bg', 'bg_BG', 'ka_GE'));
 
-		if( !empty($install_conflict_plugins) ) {
+		if( !empty($install_conflict_plugins) || !$is_cyrilic ) {
 			$tags = array();
 		} else {
 			$tags = array('recommended', 'seo_optimize');
