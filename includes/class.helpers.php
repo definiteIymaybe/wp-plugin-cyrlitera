@@ -242,14 +242,14 @@
 							continue;
 						}
 
-						$sss = $split_symbols[0];
-						$ret[$sss] = $split_symbols[1];
+						$ret[$split_symbols[0]] = $split_symbols[1];
 
-						if( strlen($split_symbols[1]) > 0 ) {
+						//todo: don't support php 7.2
+						/*if( strlen($split_symbols[1]) > 0 ) {
 							$ret[mb_strtoupper($split_symbols[0], 'UTF-8')] = mb_strtoupper($split_symbols[1]{0}, 'UTF-8') . substr($split_symbols[1], 1);
 						} else {
 							$ret[mb_strtoupper($split_symbols[0], 'UTF-8')] = $split_symbols[1];
-						}
+						}*/
 					}
 				}
 			}

@@ -71,30 +71,12 @@
 			'default' => false
 		);
 
-		/*$defaut_symbols_string = '';
-		$defaut_symbols = WCTR_Helper::getSymbolsPack();
-		$symbol_exists = array();
-
-		foreach((array)$defaut_symbols as $symbol_name => $symbol_nice_name) {
-			$symbol_name = mb_strtolower($symbol_name);
-			$symbol_nice_name = mb_strtolower($symbol_nice_name);
-
-			if( in_array($symbol_name, $symbol_exists) ) {
-				continue;
-			}
-			$defaut_symbols_string .= $symbol_name . '=' . $symbol_nice_name . ',';
-			$symbol_exists[] = $symbol_name;
-		}
-
-		$defaut_symbols_string = rtrim($defaut_symbols_string, ',');*/
-
 		$options[] = array(
 			'type' => 'textarea',
 			'way' => 'buttons',
 			'name' => 'custom_symbols_pack',
 			'title' => __('Character Sets', 'cyrlitera'),
-			'hint' => __('You can supplement current base of transliteration characters. Write pairs of values in lower case separated by commas. Example:', 'cyrlitera') . '<b>ა=a,ბ=b</b>',
-			//'default' => $defaut_symbols_string
+			'hint' => __('You can supplement current base of transliteration characters. Write pairs of values separated by commas. Example:', 'cyrlitera') . ' <b>Ё=Jo,ё=jo,Ж=Zh,ж=zh</b>'
 		);
 
 		$options[] = array(
