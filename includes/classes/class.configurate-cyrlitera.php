@@ -15,7 +15,7 @@
 
 		public function registerActionsAndFilters()
 		{
-			if( is_admin() || (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) ) {
+			if( is_admin() || !$this->getOption('dont_use_transliteration_on_frontend') ) {
 				if( $this->getOption('use_transliteration') ) {
 					if( !$this->getOption('use_force_transliteration') ) {
 						add_filter('sanitize_title', 'WCTR_Helper::sanitizeTitle', 0);

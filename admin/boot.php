@@ -70,28 +70,36 @@
 	add_filter('wbcr_clr_seo_page_warnings', 'wbcr_cyrlitera_get_conflict_notices_error');
 
 	/**
-	 * Ошибки совместимости с похожими плагинами
+	 * Печатает ошибки совместимости с похожими плагинами
 	 */
-	function wbcr_cyrlitera_admin_conflict_notices_error()
+	function wbcr_cyrlitera_admin_conflict_notices_error($notices, $plugin_name)
 	{
-		$notices = wbcr_cyrlitera_get_conflict_notices_error();
-
-		if( empty($notices) ) {
-			return;
+		if( $plugin_name != WCTR_Plugin::app()->getPluginName() ) {
+			return $notices;
 		}
 
-		?>
-		<div id="wbcr-cyrlitera-conflict-error" class="notice notice-error is-dismissible">
-			<?php foreach((array)$notices as $notice): ?>
-				<p>
-					<?= $notice ?>
-				</p>
-			<?php endforeach; ?>
-		</div>
-	<?php
+		$warnings = wbcr_cyrlitera_get_conflict_notices_error();
+
+		if( empty($warnings) ) {
+			return $notices;
+		}
+		$notice_text = '';
+		foreach((array)$warnings as $warning) {
+			$notice_text .= '<p>' . $warning . '</p>';
+		}
+
+		$notices[] = array(
+			'id' => 'cyrlitera_plugin_compatibility',
+			'type' => 'error',
+			'dismissible' => true,
+			'dismiss_expires' => 0,
+			'text' => $notice_text
+		);
+
+		return $notices;
 	}
 
-	add_action('admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error');
+	add_action('wbcr_factory_admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2);
 
 	/**
 	 * Виджет отзывов
@@ -135,6 +143,12 @@
 		);
 
 		$options[] = array(
+			'name' => 'dont_use_transliteration_on_frontend',
+			'title' => __('Don\'t use transliteration in frontend', 'cyrlitera'),
+			'tags' => array()
+		);
+
+		$options[] = array(
 			'name' => 'use_transliteration_filename',
 			'title' => __('Convert file names', 'cyrlitera'),
 			'tags' => $tags
@@ -166,7 +180,16 @@
 	function wbcr_cyrlitera_set_plugin_meta($links, $file)
 	{
 		if( $file == WCTR_PLUGIN_BASE ) {
-			$links[] = '<a href="https://goo.gl/TcMcS4" style="color: #FF5722;font-weight: bold;" target="_blank">' . __('Get ultimate plugin free', 'cyrlitera') . '</a>';
+
+			$url = 'https://clearfy.pro';
+
+			if( get_locale() == 'ru_RU' ) {
+				$url = 'https://ru.clearfy.pro';
+			}
+
+			$url .= '?utm_source=wordpress.org&utm_campaign=' . WCTR_Plugin::app()->getPluginName();
+
+			$links[] = '<a href="' . $url . '" style="color: #FF5722;font-weight: bold;" target="_blank">' . __('Get ultimate plugin free', 'cyrlitera') . '</a>';
 		}
 
 		return $links;

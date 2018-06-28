@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: clearfy\n"
-"POT-Creation-Date: 2018-03-23 17:57+0300\n"
-"PO-Revision-Date: 2018-03-23 17:57+0300\n"
+"POT-Creation-Date: 2018-05-13 16:31+0300\n"
+"PO-Revision-Date: 2018-05-13 16:32+0300\n"
 "Last-Translator: alex.kovalevv@gmail.com <alex.kovalevv@gmail.com>\n"
 "Language-Team: Alex Kovalev <alex.kovalevv@gmail.com>\n"
 "Language: ru_RU\n"
@@ -39,31 +39,35 @@ msgstr ""
 "настоятельно рекомендуем не использовать похожие функции плагинов "
 "одновременно!"
 
-#: admin/boot.php:127 admin/options.php:30
+#: admin/boot.php:135 admin/options.php:30
 msgid "Use transliteration"
 msgstr "Использовать транслитерацию"
 
-#: admin/boot.php:133 admin/options.php:48
+#: admin/boot.php:141 admin/options.php:48
 msgid "Force transliteration"
 msgstr "Принудильная траслитерация"
 
-#: admin/boot.php:139 admin/options.php:39
+#: admin/boot.php:147 admin/options.php:78
+msgid "Don't use transliteration in frontend"
+msgstr "Не использовать транслитерацию на фронтенде"
+
+#: admin/boot.php:153 admin/options.php:39
 msgid "Convert file names"
 msgstr "Конвертировать имена файлов"
 
-#: admin/boot.php:145 admin/options.php:58
+#: admin/boot.php:159 admin/options.php:58
 msgid "Convert file names into lowercase"
 msgstr "Преобразовывать имена файлов в нижний регистр"
 
-#: admin/boot.php:151 admin/options.php:68
+#: admin/boot.php:165 admin/options.php:68
 msgid "Redirection old URLs to new ones"
 msgstr "Перенаправление со старых URL на новые"
 
-#: admin/boot.php:157 admin/options.php:78
+#: admin/boot.php:171 admin/options.php:88
 msgid "Character Sets"
 msgstr "Наборы символов"
 
-#: admin/boot.php:169
+#: admin/boot.php:192
 msgid "Get ultimate plugin free"
 msgstr "Получите полную версию плагина бесплатно"
 
@@ -129,7 +133,11 @@ msgstr ""
 "ссылками, используйте эту опцию, чтобы пользователи, перешедшие по старым "
 "ссылкам, были перенаправлены на новые URL на латинице."
 
-#: admin/options.php:79
+#: admin/options.php:80
+msgid "Enable when have a problem in frontend."
+msgstr "Включите эту опцию, если у вас есть проблемы с внешней стороны сайта."
+
+#: admin/options.php:89
 msgid ""
 "You can supplement current base of transliteration characters. Write pairs "
 "of values separated by commas. Example:"
@@ -137,7 +145,7 @@ msgstr ""
 "Вы можете дополнить текущую базу символов транслитерации, пишите пары "
 "значений через запятую. Пример: "
 
-#: admin/options.php:168
+#: admin/options.php:178
 msgid ""
 "If at the time of the plugin installation you already had posts, pages, tags "
 "and categories, click on this button and the plugin will automatically "
@@ -148,17 +156,17 @@ msgstr ""
 "метки и рубрики, то нажмите на эту кнопку и плагин автоматически преобразует "
 "URLы в латинские. Внимание! Ранее загруженные файлы преобразованы не будут."
 
-#: admin/options.php:177
+#: admin/options.php:187
 msgid "Convert already created posts and categories"
 msgstr "Преобразовать уже созданные записи и рубрики"
 
-#: admin/options.php:179
+#: admin/options.php:189
 msgid "Url of old posts, pages,terms,tags successfully converted into Latin!"
 msgstr ""
 "Url старых записей, страниц, тегов и рубрик были успешно конвертированы в "
 "литинские!"
 
-#: admin/options.php:189
+#: admin/options.php:199
 msgid ""
 "Allows you to restore converted URLs by using the \"Convert already created "
 "posts and categories\" button. This can be useful in case of incorrect URLs "
@@ -171,11 +179,11 @@ msgstr ""
 "символов. У вас есть возможность откатить изменения и изменить наборы "
 "символов выше, чтобы скорректировать работу плагина."
 
-#: admin/options.php:198
+#: admin/options.php:208
 msgid "Rollback changes"
 msgstr "Откатить изменения"
 
-#: admin/options.php:200
+#: admin/options.php:210
 msgid "The rollback of new changes was successful!"
 msgstr "Откат новых изменений прошел успешно!"
 

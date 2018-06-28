@@ -72,6 +72,16 @@
 		);
 
 		$options[] = array(
+			'type' => 'checkbox',
+			'way' => 'buttons',
+			'name' => 'dont_use_transliteration_on_frontend',
+			'title' => __('Don\'t use transliteration in frontend', 'cyrlitera'),
+			'layout' => array('hint-type' => 'icon', 'hint-icon-color' => 'grey'),
+			'hint' => __('Enable when have a problem in frontend.', 'cyrlitera'),
+			'default' => false
+		);
+
+		$options[] = array(
 			'type' => 'textarea',
 			'way' => 'buttons',
 			'name' => 'custom_symbols_pack',
@@ -153,7 +163,7 @@
 				$sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($term->slug));
 
 				if( $term->slug != $sanitized_slug ) {
-					update_option('wbcr_wp_term_' . $term->term_id . '_old_slug', $term->slug);
+					update_option('wbcr_wp_term_' . $term->term_id . '_old_slug', $term->slug, false);
 					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
 				}
 			}
