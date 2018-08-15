@@ -101,24 +101,6 @@
 
 	add_action('wbcr_factory_admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2);
 
-	/**
-	 * Виджет отзывов
-	 *
-	 * @param string $page_url
-	 * @param string $plugin_name
-	 * @return string
-	 */
-	function wbcr_cyrlitera_rating_widget_url($page_url, $plugin_name)
-	{
-		if( $plugin_name == WCTR_Plugin::app()->getPluginName() ) {
-			return 'https://goo.gl/ecaj2V';
-		}
-
-		return $page_url;
-	}
-
-	add_filter('wbcr_factory_pages_000_imppage_rating_widget_url', 'wbcr_cyrlitera_rating_widget_url', 10, 2);
-
 	function wbcr_cyrlitera_group_options($options)
 	{
 		$install_conflict_plugins = wbcr_cyrlitera_install_conflict_plugins();
@@ -198,6 +180,25 @@
 	if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
 		add_filter('plugin_row_meta', 'wbcr_cyrlitera_set_plugin_meta', 10, 2);
 	}
+
+
+	/**
+	 * Виджет отзывов
+	 *
+	 * @param string $page_url
+	 * @param string $plugin_name
+	 * @return string
+	 */
+	function wbcr_cyrlitera_rating_widget_url($page_url, $plugin_name)
+	{
+		if( !defined('LOADING_CYRLITERA_AS_ADDON') && ($plugin_name == WCTR_Plugin::app()->getPluginName()) ) {
+			return 'https://goo.gl/ecaj2V';
+		}
+
+		return $page_url;
+	}
+
+	add_filter('wbcr_factory_pages_000_imppage_rating_widget_url', 'wbcr_cyrlitera_rating_widget_url', 10, 2);
 
 
 
