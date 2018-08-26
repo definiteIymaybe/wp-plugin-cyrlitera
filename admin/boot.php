@@ -99,7 +99,7 @@
 		return $notices;
 	}
 
-	add_action('wbcr_factory_admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2);
+	add_action('wbcr_factory_notices_000_list', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2);
 
 	function wbcr_cyrlitera_group_options($options)
 	{
