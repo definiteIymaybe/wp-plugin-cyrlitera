@@ -96,7 +96,6 @@
 
 		return $options;
 	}
-	
 
 	/**
 	 * @param $html_builder Wbcr_FactoryForms000_Html
@@ -111,14 +110,13 @@
 		if( isset($_POST['wbcr_cyrlitera_rollback_action']) ) {
 			check_admin_referer($form_name, 'wbcr_cyrlitera_rollback_nonce');
 			if ( WCTR_Plugin::app()->isNetworkActive() ) {
-				$blogs = WCTR_Plugin::app()->getBlogs();
-				foreach ( $blogs as $id ) {
-					switch_to_blog( $id );
-					WCTR_Plugin::app()->rollback();
+				foreach ( WCTR_Plugin::app()->getActiveSites() as $site ) {
+					switch_to_blog( $site->blog_id );
+					WCTR_Plugin::app()->rollbackUrlChanges();
 					restore_current_blog();
 				}
 			} else {
-				WCTR_Plugin::app()->rollback();
+				WCTR_Plugin::app()->rollbackUrlChanges();
 			}
 
 			$rollback = true;
@@ -127,14 +125,13 @@
 		if( isset($_POST['wbcr_cyrlitera_convert_now_action']) ) {
 			check_admin_referer($form_name, 'wbcr_cyrlitera_convert_now_nonce');
 			if ( WCTR_Plugin::app()->isNetworkActive() ) {
-				$blogs = WCTR_Plugin::app()->getBlogs();
-				foreach ( $blogs as $id ) {
-					switch_to_blog( $id );
-					WCTR_Plugin::app()->convert();
+				foreach ( WCTR_Plugin::app()->getActiveSites() as $site ) {
+					switch_to_blog( $site->blog_id );
+					WCTR_Plugin::app()->convertUrls();
 					restore_current_blog();
 				}
 			} else {
-				WCTR_Plugin::app()->convert();
+				WCTR_Plugin::app()->convertUrls();
 			}
 
 			$convert_now = true;
