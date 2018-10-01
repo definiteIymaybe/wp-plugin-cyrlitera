@@ -109,32 +109,14 @@
 
 		if( isset($_POST['wbcr_cyrlitera_rollback_action']) ) {
 			check_admin_referer($form_name, 'wbcr_cyrlitera_rollback_nonce');
-
-			global $wpdb;
-
-			$posts = $wpdb->get_results("SELECT p.ID, p.post_name, m.meta_value as old_post_name FROM {$wpdb->posts} p
-					LEFT JOIN {$wpdb->postmeta} m
-					ON p.ID = m.post_id
-					WHERE p.post_status
-					IN ('publish', 'future', 'private') AND m.meta_key='wbcr_wp_old_slug' AND m.meta_value IS NOT NULL");
-
-			foreach((array)$posts as $post) {
-				if( $post->post_name != $post->old_post_name ) {
-					$wpdb->update($wpdb->posts, array('post_name' => $post->old_post_name), array('ID' => $post->ID), array('%s'), array('%d'));
-					delete_post_meta($post->ID, 'wbcr_wp_old_slug');
+			if ( WCTR_Plugin::app()->isNetworkActive() ) {
+				foreach ( WCTR_Plugin::app()->getActiveSites() as $site ) {
+					switch_to_blog( $site->blog_id );
+					WCTR_Plugin::app()->rollbackUrlChanges();
+					restore_current_blog();
 				}
-			}
-
-			$terms = $wpdb->get_results("SELECT t.term_id, t.slug, o.option_value as old_term_slug FROM {$wpdb->terms} t
-					LEFT JOIN {$wpdb->options} o
-					ON o.option_name=concat('wbcr_wp_term_',t.term_id, '_old_slug')
-					WHERE o.option_value IS NOT NULL");
-
-			foreach((array)$terms as $term) {
-				if( $term->slug != $term->old_term_slug ) {
-					$wpdb->update($wpdb->terms, array('slug' => $term->old_term_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
-					delete_option('wbcr_wp_term_' . $term->term_id . '_old_slug');
-				}
+			} else {
+				WCTR_Plugin::app()->rollbackUrlChanges();
 			}
 
 			$rollback = true;
@@ -142,30 +124,14 @@
 
 		if( isset($_POST['wbcr_cyrlitera_convert_now_action']) ) {
 			check_admin_referer($form_name, 'wbcr_cyrlitera_convert_now_nonce');
-
-			global $wpdb;
-
-			$posts = $wpdb->get_results("SELECT ID, post_name FROM {$wpdb->posts} WHERE post_name REGEXP('[^_A-Za-z0-9\-]+') AND post_status IN ('publish', 'future', 'private')");
-
-			foreach((array)$posts as $post) {
-				$sanitized_name = WCTR_Helper::sanitizeTitle(urldecode($post->post_name));
-
-				if( $post->post_name != $sanitized_name ) {
-					add_post_meta($post->ID, 'wbcr_wp_old_slug', $post->post_name);
-
-					$wpdb->update($wpdb->posts, array('post_name' => $sanitized_name), array('ID' => $post->ID), array('%s'), array('%d'));
+			if ( WCTR_Plugin::app()->isNetworkActive() ) {
+				foreach ( WCTR_Plugin::app()->getActiveSites() as $site ) {
+					switch_to_blog( $site->blog_id );
+					WCTR_Plugin::app()->convertUrls();
+					restore_current_blog();
 				}
-			}
-
-			$terms = $wpdb->get_results("SELECT term_id, slug FROM {$wpdb->terms} WHERE slug REGEXP('[^_A-Za-z0-9\-]+') ");
-
-			foreach((array)$terms as $term) {
-				$sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($term->slug));
-
-				if( $term->slug != $sanitized_slug ) {
-					update_option('wbcr_wp_term_' . $term->term_id . '_old_slug', $term->slug, false);
-					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
-				}
+			} else {
+				WCTR_Plugin::app()->convertUrls();
 			}
 
 			$convert_now = true;
