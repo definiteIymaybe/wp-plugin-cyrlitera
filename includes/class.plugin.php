@@ -3,7 +3,7 @@
 	 * Transliteration core class
 	 * @author Webcraftic <wordpress.webraftic@gmail.com>
 	 * @copyright (c) 19.02.2018, Webcraftic
-	 * @version 1.0
+	 * @version 1.1
 	 */
 
 	// Exit if accessed directly
@@ -36,8 +36,6 @@
 			 * @var bool
 			 */
 			private $as_addon;
-			
-			private $network_active;
 
 			/**
 			 * @param string $plugin_path
@@ -46,7 +44,6 @@
 			 */
 			public function __construct($plugin_path, $data)
 			{
-				$this->network_active = ( is_multisite() && array_key_exists( WCTR_PLUGIN_BASE, (array) get_site_option( 'active_sitewide_plugins' ) ) );
 				$this->as_addon = isset($data['as_addon']);
 
 				if( $this->as_addon ) {
@@ -96,13 +93,6 @@
 					));
 				}
 			}
-			
-			public function isNetworkActive() {
-				if ( $this->network_active ) {
-					return true;
-				}
-				return false;
-			}
 
 			protected function initActivation()
 			{
@@ -114,14 +104,6 @@
 
 			private function registerPages()
 			{
-				if( $this->as_addon ) {
-					return;
-				}
-				
-				if ( $this->isNetworkActive() and ! is_network_admin() ) {
-					return;
-				}
-
 				self::app()->registerPage('WCTR_CyrliteraPage', WCTR_PLUGIN_DIR . '/admin/pages/cyrlitera.php');
 				self::app()->registerPage('WCTR_MoreFeaturesPage', WCTR_PLUGIN_DIR . '/admin/pages/more-features.php');
 			}
@@ -140,6 +122,5 @@
 				require_once(WCTR_PLUGIN_DIR . '/includes/classes/class.configurate-cyrlitera.php');
 				new WCTR_ConfigСyrlitera(self::$app);
 			}
-
 		}
 	}

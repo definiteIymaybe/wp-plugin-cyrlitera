@@ -181,7 +181,6 @@
 		add_filter('plugin_row_meta', 'wbcr_cyrlitera_set_plugin_meta', 10, 2);
 	}
 
-
 	/**
 	 * Виджет отзывов
 	 *
