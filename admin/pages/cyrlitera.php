@@ -11,7 +11,7 @@
 		exit;
 	}
 
-	class WCTR_CyrliteraPage extends Wbcr_FactoryPages000_ImpressiveThemplate {
+	class WCTR_CyrliteraPage extends Wbcr_FactoryClearfy000_PageBase {
 
 		/**
 		 * The id of the page in the admin menu.
@@ -51,24 +51,6 @@
 		public function getMenuTitle()
 		{
 			return defined('LOADING_CYRLITERA_AS_ADDON') ? __('Transliteration', 'cyrlitera') : __('General', 'cyrlitera');
-		}
-
-		/**
-		 * Requests assets (js and css) for the page.
-		 *
-		 * @see Wbcr_FactoryPages000_AdminPage
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function assets($scripts, $styles)
-		{
-			parent::assets($scripts, $styles);
-
-			// Add Clearfy styles for HMWP pages
-			if( defined('WBCR_CLEARFY_PLUGIN_ACTIVE') ) {
-				$this->styles->add(WCL_PLUGIN_URL . '/admin/assets/css/general.css');
-			}
 		}
 
 		/**
@@ -252,13 +234,13 @@
 			?>
 
 			<div class="form-group form-group-checkbox factory-control-convert_now_button">
-				<label for="wbcr_clearfy_convert_now_button" class="col-sm-6 control-label">
+				<label for="wbcr_clearfy_convert_now_button" class="col-sm-4 control-label">
 				<span class="factory-hint-icon factory-hint-icon-grey" data-toggle="factory-tooltip" data-placement="right" title="" data-original-title="<?php _e('If at the time of the plugin installation you already had posts, pages, tags and categories, click on this button and the plugin will automatically convert URLs into Latin. Attention! Previously uploaded files will not be converted.', 'cyrlitera') ?>">
 					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAQAAABKmM6bAAAAUUlEQVQIHU3BsQ1AQABA0X/komIrnQHYwyhqQ1hBo9KZRKL9CBfeAwy2ri42JA4mPQ9rJ6OVt0BisFM3Po7qbEliru7m/FkY+TN64ZVxEzh4ndrMN7+Z+jXCAAAAAElFTkSuQmCC" alt="">
 				</span>
 				</label>
 
-				<div class="control-group col-sm-6">
+				<div class="control-group col-sm-8">
 					<div class="factory-checkbox factory-from-control-checkbox factory-buttons-way btn-group">
 						<form method="post">
 							<?php wp_nonce_field($form_name, 'wbcr_cyrlitera_convert_now_nonce'); ?>
@@ -273,13 +255,13 @@
 
 
 			<div class="form-group form-group-checkbox factory-control-rollback_button">
-				<label for="wbcr_clearfy_rollback_button" class="col-sm-6 control-label">
+				<label for="wbcr_clearfy_rollback_button" class="col-sm-4 control-label">
 				<span class="factory-hint-icon factory-hint-icon-grey" data-toggle="factory-tooltip" data-placement="right" title="" data-original-title="<?php _e('Allows you to restore converted URLs by using the "Convert already created posts and categories" button. This can be useful in case of incorrect URLs or incorrect transliteration of some characters. You can roll back changes and advance the character sets above to correct the plugin\'s work. ', 'cyrlitera') ?>">
 					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAQAAABKmM6bAAAAUUlEQVQIHU3BsQ1AQABA0X/komIrnQHYwyhqQ1hBo9KZRKL9CBfeAwy2ri42JA4mPQ9rJ6OVt0BisFM3Po7qbEliru7m/FkY+TN64ZVxEzh4ndrMN7+Z+jXCAAAAAElFTkSuQmCC" alt="">
 				</span>
 				</label>
 
-				<div class="control-group col-sm-6">
+				<div class="control-group col-sm-8">
 					<div class="factory-checkbox factory-from-control-checkbox factory-buttons-way btn-group">
 						<form method="post">
 							<?php wp_nonce_field($form_name, 'wbcr_cyrlitera_rollback_nonce'); ?>
