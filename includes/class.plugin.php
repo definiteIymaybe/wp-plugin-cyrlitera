@@ -62,8 +62,6 @@
 					parent::__construct($plugin_path, $data);
 				}
 
-				self::app()->setTextDomain('cyrlitera', WCTR_PLUGIN_DIR);
-
 				$this->setModules();
 
 				$this->globalScripts();
@@ -71,6 +69,8 @@
 				if( is_admin() ) {
 					$this->adminScripts();
 				}
+
+				add_action('plugins_loaded', array($this, 'pluginsLoaded'));
 			}
 
 			/**
@@ -79,6 +79,10 @@
 			public static function app()
 			{
 				return self::$app;
+			}
+
+			public function pluginsLoaded() {
+				self::app()->setTextDomain('cyrlitera', WCTR_PLUGIN_DIR);
 			}
 
 			protected function setModules()

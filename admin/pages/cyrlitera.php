@@ -25,6 +25,10 @@
 		public $id = "transliteration";
 		public $page_parent_page = "seo";
 		public $page_menu_dashicon = 'dashicons-testimonial';
+		/**
+		 * Доступена для мультисайтов
+		 * @var bool
+		 */
 		public $available_for_multisite = true;
 
 		/**
