@@ -225,7 +225,7 @@
 				);
 			}
 
-			$custom_rules = WCTR_Plugin::app()->getOption('custom_symbols_pack');
+			$custom_rules = WCTR_Plugin::app()->getPopulateOption('custom_symbols_pack');
 
 			if( !empty($custom_rules) ) {
 				$split_rules = explode(',', $custom_rules);

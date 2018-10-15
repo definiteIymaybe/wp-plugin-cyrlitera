@@ -8,6 +8,6 @@
 
 		public function install()
 		{
-			WCTR_Plugin::app()->deleteOption('custom_symbols_pack');
+			WCTR_Plugin::app()->deletePopulateOption('custom_symbols_pack');
 		}
 	}

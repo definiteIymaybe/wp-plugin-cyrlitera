@@ -22,8 +22,8 @@
 		 */
 		public function activate()
 		{
-			WCTR_Plugin::app()->updateOption('use_transliteration', 1);
-			WCTR_Plugin::app()->updateOption('use_transliteration_filename', 1);
-			WCTR_Plugin::app()->updateOption('filename_to_lowercase', 1);
+			WCTR_Plugin::app()->updatePopulateOption('use_transliteration', 1);
+			WCTR_Plugin::app()->updatePopulateOption('use_transliteration_filename', 1);
+			WCTR_Plugin::app()->updatePopulateOption('filename_to_lowercase', 1);
 		}
 	}
