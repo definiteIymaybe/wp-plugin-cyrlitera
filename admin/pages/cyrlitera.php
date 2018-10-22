@@ -48,26 +48,11 @@
 			parent::__construct($plugin);
 
 			$this->plugin = $plugin;
-
-			add_action('wbcr_clearfy_configurated_quick_mode', array($this, 'convertSlugsAfterClearfyConfigurate'));
 		}
 
-		public function getMenuTitle()
+		public function getPageTitle()
 		{
 			return defined('LOADING_CYRLITERA_AS_ADDON') ? __('Transliteration', 'cyrlitera') : __('General', 'cyrlitera');
-		}
-
-		/**
-		 * Когда в CLearfy пользователь выполняет быструю настройку "ONE CLICK SEO OPTIMIZATION",
-		 * мы включаем транслитерацию и преобразовываем слаги для уже существующих страниц, терминов
-		 *
-		 * @param string $mode_name - имя режима быстрой настройки
-		 */
-		public function convertSlugsAfterClearfyConfigurate($mode_name)
-		{
-			if( $mode_name == 'seo_optimize' ) {
-				$this->convertExistingSlugs();
-			}
 		}
 
 		/**
@@ -76,7 +61,7 @@
 		 */
 		public function convertExistingSlugs()
 		{
-			$use_transliterations = $this->plugin->getPopulateOption('use_transliterations');
+			$use_transliterations = $this->plugin->getPopulateOption('use_transliteration');
 			$transliterate_existing_slugs = $this->plugin->getPopulateOption('transliterate_existing_slugs');
 
 			if( !$use_transliterations || $transliterate_existing_slugs ) {
@@ -104,7 +89,7 @@
 		 * @since 1.0.0
 		 * @return mixed[]
 		 */
-		public function getPopulateOptions()
+		public function getPageOptions()
 		{
 			$options[] = array(
 				'type' => 'html',

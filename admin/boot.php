@@ -12,6 +12,27 @@
 	}
 
 	/**
+	 * Когда в CLearfy пользователь выполняет быструю настройку "ONE CLICK SEO OPTIMIZATION",
+	 * мы включаем транслитерацию и преобразовываем слаги для уже существующих страниц, терминов
+	 *
+	 * @param string $mode_name - имя режима быстрой настройки
+	 */
+	add_action('wbcr_clearfy_configurated_quick_mode', function ($mode_name) {
+		if( $mode_name == 'seo_optimize' ) {
+			$use_transliterations = WCTR_Plugin::app()->getPopulateOption('use_transliteration');
+			$transliterate_existing_slugs = WCTR_Plugin::app()->getPopulateOption('transliterate_existing_slugs');
+
+			if( !$use_transliterations || $transliterate_existing_slugs ) {
+				return;
+			}
+
+			WCTR_Helper::convertExistingSlugs();
+
+			WCTR_Plugin::app()->updatePopulateOption('transliterate_existing_slugs', 1);
+		}
+	});
+
+	/**
 	 * @return array
 	 */
 	function wbcr_cyrlitera_install_conflict_plugins()
