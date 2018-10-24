@@ -8,6 +8,7 @@
 	 * Text Domain: cyrlitera
 	 * Domain Path: /languages/
 	 * Author URI: http://clearfy.pro
+	 * Framework Version: FACTORY_000_VERSION
 	 */
 
 	// Exit if accessed directly
