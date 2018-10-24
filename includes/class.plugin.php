@@ -81,7 +81,8 @@
 				return self::$app;
 			}
 
-			public function pluginsLoaded() {
+			public function pluginsLoaded()
+			{
 				self::app()->setTextDomain('cyrlitera', WCTR_PLUGIN_DIR);
 			}
 
@@ -109,7 +110,10 @@
 			private function registerPages()
 			{
 				self::app()->registerPage('WCTR_CyrliteraPage', WCTR_PLUGIN_DIR . '/admin/pages/cyrlitera.php');
-				self::app()->registerPage('WCTR_MoreFeaturesPage', WCTR_PLUGIN_DIR . '/admin/pages/more-features.php');
+
+				if( !$this->as_addon ) {
+					self::app()->registerPage('WCTR_MoreFeaturesPage', WCTR_PLUGIN_DIR . '/admin/pages/more-features.php');
+				}
 			}
 			
 			private function adminScripts()
