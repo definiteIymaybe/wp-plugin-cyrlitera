@@ -55,6 +55,12 @@
 				}
 			}
 
+            foreach ($backtrace as $backtrace_entry) {
+                if($backtrace_entry['function'] == 'query_posts' and isset($backtrace_entry['class']) and $backtrace_entry['class'] == 'WP'){
+                    return $origin_title;
+                }
+            }
+
 			$term = $is_term ? $wpdb->get_var($wpdb->prepare("SELECT slug FROM {$wpdb->terms} WHERE name = '%s'", $title)) : '';
 
 			if( empty($term) ) {
