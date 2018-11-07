@@ -231,7 +231,138 @@
 				);
 			}
 
-			$custom_rules = WCTR_Plugin::app()->getPopulateOption('custom_symbols_pack');
+
+            // Armenian
+            if( $loc == 'hy'){
+                $ret = array_merge($ret, array(
+                    'Ա' => 'A',
+                    'ա' => 'a',
+                    'Բ' => 'B',
+                    'բ' => 'b',
+                    'Գ' => 'G',
+                    'գ' => 'g',
+                    'Դ' => 'D',
+                    'դ' => 'd',
+                    ' Ե' => ' Ye',
+                    'Ե' => 'E',
+                    ' ե' => ' ye',
+                    'ե' => 'e',
+                    'Զ' => 'Z',
+                    'զ' => 'z',
+                    'Է' => 'E',
+                    'է' => 'e',
+                    'Ը' => 'Y',
+                    'ը' => 'y',
+                    'Թ' => 'T',
+                    'թ' => 't',
+                    'Ժ' => 'Zh',
+                    'ժ' => 'zh',
+                    'Ի' => 'I',
+                    'ի' => 'i',
+                    'Լ' => 'L',
+                    'լ' => 'l',
+                    'Խ' => 'KH',
+                    'խ' => 'kh',
+                    'Ծ' => 'TS',
+                    'ծ' => 'ts',
+                    'Կ' => 'K',
+                    'կ' => 'K',
+                    'Հ' => 'H',
+                    'հ' => 'h',
+                    'Ձ' => 'DZ',
+                    'ձ' => 'dz',
+                    'Ղ' => 'GH',
+                    'ղ' => 'gh',
+                    'Ճ' => 'J',
+                    'Ճ' => 'j',
+                    'Մ' => 'M',
+                    'մ' => 'm',
+                    'Յ' => 'Y',
+                    'յ' => 'y',
+                    'Ն' => 'N',
+                    'ն' => 'n',
+                    'Շ' => 'SH',
+                    'շ' => 'sh',
+                    ' Ո' => 'VO',
+                    'Ո' => 'VO',
+                    ' ո' => ' vo',
+                    'ո' => 'o',
+                    'Չ' => 'Ch',
+                    'չ' => 'ch',
+                    'Պ' => 'P',
+                    'պ' => 'p',
+                    'Ջ' => 'J',
+                    'ջ' => 'j',
+                    'Ռ' => 'R',
+                    'ռ' => 'r',
+                    'Ս' => 'S',
+                    'ս' => 's',
+                    'Վ' => 'V',
+                    'վ' => 'v',
+                    'Տ' => 'T',
+                    'տ' => 't',
+                    'Ր' => 'R',
+                    'ր' => 'r',
+                    'Ց' => 'C',
+                    'ց' => 'c',
+                    'Ու' => 'U',
+                    'ու' => 'u',
+                    'Փ' => 'P',
+                    'փ' => 'p',
+                    'Ք' => 'Q',
+                    'ք' => 'q',
+                    'Եվ' => 'EV',
+                    'և' => 'ev',
+                    'Օ' => 'O',
+                    'օ' => 'o',
+                    'Ֆ' => 'F',
+                    'ֆ' => 'f'
+                ));
+            }
+
+            // Serbian
+            if($loc == 'sr_RS'){
+                $ret = array_merge($ret, array(
+                    "Ђ" => "DJ",
+                    "Ж" => "Z",
+                    "З" => "Z",
+                    "Љ" => "LJ",
+                    "Њ" => "NJ",
+                    "Ш" => "S",
+                    "Ћ" => "C",
+                    "Ц" => "C",
+                    "Ч" => "C",
+                    "Џ" => "DZ",
+                    "ђ" => "dj",
+                    "ж" => "z",
+                    "з" => "z",
+                    "и" => "i",
+                    "љ" => "lj",
+                    "њ" => "nj",
+                    "ш" => "s",
+                    "ћ" => "c",
+                    "ч" => "c",
+                    "џ" => "dz",
+                    "Ња" => "Nja",
+                    "Ње" => "Nje",
+                    "Њи" => "Nji",
+                    "Њо" => "Njo",
+                    "Њу" => "Nju",
+                    "Ља" => "Lja",
+                    "Ље" => "Lje",
+                    "Љи" => "Lji",
+                    "Љо" => "Ljo",
+                    "Љу" => "Lju",
+                    "Џа" => "Dza",
+                    "Џе" => "Dze",
+                    "Џи" => "Dzi",
+                    "Џо" => "Dzo",
+                    "Џу" => "Dzu"
+                ));
+            }
+
+
+            $custom_rules = WCTR_Plugin::app()->getPopulateOption('custom_symbols_pack');
 
 			if( !empty($custom_rules) ) {
 				$split_rules = explode(',', $custom_rules);
@@ -285,6 +416,85 @@
 					delete_option('wbcr_wp_term_' . $term->term_id . '_old_slug');
 				}
 			}
+
+            // BuddyPress group slug
+            // ! slug maybe urlencoded
+            if(is_plugin_active('buddypress/bp-loader.php')){
+                $groups = $wpdb->get_results("SELECT t.id, t.name, t.slug, o.option_value as old_term_slug FROM {$wpdb->prefix}bp_groups t 
+						LEFT JOIN {$wpdb->options} o
+						ON o.option_name=concat('wbcr_bp_groups_',t.id, '_old_slug')
+						WHERE o.option_value IS NOT NULL");
+                foreach ((array)$groups as $group) {
+                    if( $group->slug != $group->old_term_slug ){
+                        $wpdb->update("{$wpdb->prefix}bp_groups", array('slug' => $group->old_term_slug), array('id' => $group->id), array('%s'), array('%d'));
+                        delete_option('wbcr_bp_groups_'.$group->id.'_old_slug');
+                    }
+                }
+            }
+
+
+            // Asgaros Forum
+            if(is_plugin_active('asgaros-forum/asgaros-forum.php')){
+                $forums = $wpdb->get_results("SELECT t.id, t.name, t.slug, o.option_value as old_term_slug FROM {$wpdb->prefix}forum_forums t
+						LEFT JOIN {$wpdb->options} o
+						ON o.option_name=concat('wbcr_asgaros_forums_',t.id, '_old_slug')
+						WHERE o.option_value IS NOT NULL");
+                foreach( (array) $forums as $forum){
+                    if( $forum->slug != $forum->old_term_slug ){
+                        $wpdb->update("{$wpdb->prefix}forum_forums", array('slug' => $forum->old_term_slug), array('id' => $forum->id), array('%s'), array('%d'));
+                        delete_option('wbcr_asgaros_forums_'.$forum->id.'_old_slug');
+                    }
+                }
+
+                //topic
+                $topics = $wpdb->get_results("SELECT t.id, t.name, t.slug, o.option_value as old_term_slug FROM {$wpdb->prefix}forum_topics t
+						LEFT JOIN {$wpdb->options} o
+						ON o.option_name=concat('wbcr_asgaros_topics_',t.id, '_old_slug')
+						WHERE o.option_value IS NOT NULL");
+                foreach ( (array) $topics as $topic){
+                    if( $topic->slug != $topic->old_term_slug ){
+                        $wpdb->update("{$wpdb->prefix}forum_topics", array('slug' => $topic->old_term_slug), array('id' => $topic->id), array('%s'), array('%d'));
+                        delete_option('wbcr_asgaros_topics_'.$topic->id.'_old_slug');
+                    }
+                }
+
+            }
+
+            // WP Foro
+            if(is_plugin_active('wpforo/wpforo.php')) {
+                // forums
+                $forums = $wpdb->get_results("SELECT t.forumid, t.title, t.slug, o.option_value as old_term_slug FROM {$wpdb->prefix}wpforo_forums t
+						LEFT JOIN {$wpdb->options} o
+						ON o.option_name=concat('wbcr_wpforo_forums_',t.forumid, '_old_slug')
+						WHERE o.option_value IS NOT NULL");
+
+                foreach ( (array) $forums as $forum){
+                    if( $forum->slug != $forum->old_term_slug ){
+                        $wpdb->update("{$wpdb->prefix}wpforo_forums", array('slug' => $forum->old_term_slug), array('forumid' => $forum->forumid), array('%s'), array('%d'));
+                        delete_option('wbcr_wpforo_forums_'.$topic->id.'_old_slug');
+                    }
+                }
+
+                // topics
+                $topics = $wpdb->get_results("SELECT t.topicid, t.title, t.slug, o.option_value as old_term_slug FROM {$wpdb->prefix}wpforo_topics t
+						LEFT JOIN {$wpdb->options} o
+						ON o.option_name=concat('wbcr_wpforo_topics_',t.topicid, '_old_slug')
+						WHERE o.option_value IS NOT NULL");
+
+                foreach ( (array) $topics as $topic){
+                    if( $topic->slug != $topic->old_term_slug ){
+                        $wpdb->update("{$wpdb->prefix}wpforo_topics", array('slug' => $topic->old_term_slug), array('topicid' => $topic->topicid), array('%s'), array('%d'));
+                        delete_option('wbcr_wpforo_topics_'.$topic->id.'_old_slug');
+                    }
+                }
+
+                // clear cache
+                WPF()->phrase->clear_cache();
+                WPF()->member->clear_db_cache();
+                wpforo_clean_cache();
+            }
+
+
 		}
 
 		/**
@@ -318,5 +528,82 @@
 					$wpdb->update($wpdb->terms, array('slug' => $sanitized_slug), array('term_id' => $term->term_id), array('%s'), array('%d'));
 				}
 			}
-		}
+
+            // BuddyPress group slug
+            // ! slug maybe urlencoded
+            if(is_plugin_active('buddypress/bp-loader.php')){
+
+                $groups = $wpdb->get_results("SELECT `id`, `name`, `slug` FROM {$wpdb->prefix}bp_groups WHERE slug REGEXP('%|[^_A-Za-z0-9\-]+')");
+                if(is_array($groups)){
+                    foreach ($groups as $group){
+                        $sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($group->slug));
+                        if($group->slug != $sanitized_slug){
+                            update_option('wbcr_bp_groups_'.$group->id.'_old_slug', $group->slug, false);
+                            $wpdb->update($wpdb->prefix.'bp_groups', array('slug' => $sanitized_slug), array('id' => $group->id), array('%s'), array('%d'));
+                        }
+                    }
+                }
+            }
+
+            // Asgaros Forum
+            if(is_plugin_active('asgaros-forum/asgaros-forum.php')){
+                // forum slug
+                $groups = $wpdb->get_results("SELECT `id`, `name`, `slug` FROM {$wpdb->prefix}forum_forums WHERE slug REGEXP('%|[^_A-Za-z0-9\-]+')");
+                if(is_array($groups)){
+                    foreach ($groups as $group){
+                        $sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($group->slug));
+                        if($group->slug != $sanitized_slug){
+                            update_option('wbcr_asgaros_forums_'.$group->id.'_old_slug', $group->slug, false);
+                            $wpdb->update($wpdb->prefix.'forum_forums', array('slug' => $sanitized_slug), array('id' => $group->id), array('%s'), array('%d'));
+                        }
+                    }
+                }
+                // topic slug
+                $groups = $wpdb->get_results("SELECT `id`, `name`, `slug` FROM {$wpdb->prefix}forum_topics WHERE slug REGEXP('%|[^_A-Za-z0-9\-]+')");
+                if(is_array($groups)){
+                    foreach ($groups as $group){
+                        $sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($group->slug));
+                        if($group->slug != $sanitized_slug){
+                            update_option('wbcr_asgaros_topics_'.$group->id.'_old_slug', $group->slug, false);
+                            $wpdb->update($wpdb->prefix.'forum_topics', array('slug' => $sanitized_slug), array('id' => $group->id), array('%s'), array('%d'));
+                        }
+                    }
+                }
+
+            }
+
+            // WP Foro
+            if(is_plugin_active('wpforo/wpforo.php')){
+                // forum slug
+                $forums = $wpdb->get_results("SELECT `forumid`, `title`, `slug` FROM {$wpdb->prefix}wpforo_forums WHERE slug REGEXP('%|[^_A-Za-z0-9\-]+')");
+                if(is_array($forums)){
+                    foreach ($forums as $forum){
+                        $sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($forum->slug));
+                        if($forum->slug != $sanitized_slug){
+                            update_option('wbcr_wpforo_forums_'.$forum->forumid.'_old_slug', $forum->slug, false);
+                            $wpdb->update($wpdb->prefix.'wpforo_forums', array('slug' => $sanitized_slug), array('forumid' => $forum->forumid), array('%s'), array('%d'));
+                        }
+                    }
+                }
+
+                // topic slug
+                $topics = $wpdb->get_results("SELECT `topicid`, `title`, `slug` FROM {$wpdb->prefix}wpforo_topics WHERE slug REGEXP('%|[^_A-Za-z0-9\-]+')");
+                if(is_array($topics)){
+                    foreach ($topics as $topic) {
+                        $sanitized_slug = WCTR_Helper::sanitizeTitle(urldecode($topic->slug));
+                        if($topic->slug != $sanitized_slug){
+                            update_option('wbcr_wpforo_topics_'.$topic->topicid.'_old_slug', $topic->slug, false);
+                            $wpdb->update($wpdb->prefix.'wpforo_topics', array('slug' => $sanitized_slug), array('topicid' => $topic->topicid), array('%s'), array('%d'));
+                        }
+                    }
+                }
+
+                // clear cache
+                WPF()->phrase->clear_cache();
+                WPF()->member->clear_db_cache();
+                wpforo_clean_cache();
+            }
+
+
+        }
 	}

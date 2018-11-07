@@ -22,7 +22,9 @@
 					} else {
 						add_filter('sanitize_title', array($this, 'forceSanitizeTitle'), 99, 2);
 					}
-				}
+
+                    add_action('admin_init', array($this, 'acfScripts'));
+                }
 				if( $this->getPopulateOption('use_transliteration_filename') ) {
 					if( !$this->getPopulateOption('use_force_transliteration') ) {
 						add_filter('sanitize_file_name', array($this, 'sanitizeFileName'), 9);
@@ -37,7 +39,37 @@
 					? 11
 					: 10);
 			}
-		}
+
+            // Asgaros Forum set 404
+            if(is_plugin_active('asgaros-forum/asgaros-forum.php')) {
+                add_action('asgarosforum_prepare_forum', array($this, 'asgarosSet404'));
+                add_action('asgarosforum_prepare_topic', array($this, 'asgarosSet404'));
+            }
+
+        }
+
+        public function asgarosSet404(){
+            $trace = debug_backtrace();
+            foreach ($trace as $item) {
+                if ($item['function'] == 'prepare' and $item['class'] == 'AsgarosForum' and is_object($item['object'])) {
+                    if (!$item['object']->parents_set) {
+                        if (!defined('ASGAROS_404')) define('ASGAROS_404', true);
+                    }
+                }
+            }
+        }
+
+        public function acfScripts(){
+            global $pagenow;
+
+            $on_acf_edit_page = 'post.php' === $pagenow && isset($_GET['post']) && 'acf-field-group' === get_post_type( $_GET['post'] );
+            if(is_plugin_active('advanced-custom-fields/acf.php') and $on_acf_edit_page){
+                $data = "window.cyr_and_lat_dict = ".json_encode(WCTR_Helper::getSymbolsPack()). ";";
+
+                wp_enqueue_script('cyrlitera-for-acf', WCTR_PLUGIN_URL.'/admin/assets/js/cyrlitera-for-acf.js', array('jquery', 'acf-field-group'));
+                wp_add_inline_script('cyrlitera-for-acf', $data, 'before');
+            }
+        }
 
 		/**
 		 * @param string $title обработанный заголовок
@@ -212,6 +244,10 @@
 					$is404 = true;
 				}
 			}
+
+			if( is_plugin_active('asgaros-forum/asgaros-forum.php') and defined('ASGAROS_404') and ASGAROS_404 === true){
+                $is404 = true;
+            }
 
 			if( $is404 ) {
 				if( $this->getPopulateOption('redirect_from_old_urls') ) {
