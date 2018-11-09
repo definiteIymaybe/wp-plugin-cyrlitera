@@ -240,7 +240,7 @@
 
 			if( $this->wpForoIsActivated() ) {
 				global $wpforo;
-				if( $is404 || $wpforo->current_object['is_404'] ) {
+				if( $is404 || $wpforo->current_object['is_404'] || ($wpforo->current_object['template'] == 'post' and !count($wpforo->current_object['topic']))) {
 					$is404 = true;
 				}
 			}
