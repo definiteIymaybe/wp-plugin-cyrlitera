@@ -128,7 +128,7 @@
 			private function globalScripts()
 			{
 				require_once(WCTR_PLUGIN_DIR . '/includes/classes/class.configurate-cyrlitera.php');
-				new WCTR_ConfigСyrlitera(self::$app);
+				new WCTR_ConfigurateCyrlitera(self::$app);
 			}
 		}
 	}

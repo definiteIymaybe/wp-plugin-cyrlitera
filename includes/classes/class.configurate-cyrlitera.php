@@ -11,7 +11,7 @@
 		exit;
 	}
 
-	class WCTR_ConfigСyrlitera extends Wbcr_FactoryClearfy000_Configurate {
+	class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
 
 		public function registerActionsAndFilters()
 		{
