@@ -1,103 +1,125 @@
 <?php
-	/**
-	 * Plugin Name: Webcraftic Cyrlitera – transliteration of links and file names
-	 * Plugin URI: https://wordpress.org/plugins/cyrlitera/
-	 * Description: The plugin converts Cyrillic, Georgian links, filenames into Latin. It is necessary for correct work of WordPress plugins and improve links readability.
-	 * Author: Webcraftic <wordpress.webraftic@gmail.com>
-	 * Version: 1.0.6
-	 * Text Domain: cyrlitera
-	 * Domain Path: /languages/
-	 * Author URI: http://clearfy.pro
-	 * Framework Version: FACTORY_000_VERSION
-	 */
+/**
+ * Plugin Name: Webcraftic Cyrlitera – transliteration of links and file names
+ * Plugin URI: https://wordpress.org/plugins/cyrlitera/
+ * Description: The plugin converts Cyrillic, Georgian links, filenames into Latin. It is necessary for correct work of WordPress plugins and improve links readability.
+ * Author: Webcraftic <wordpress.webraftic@gmail.com>
+ * Version: 1.1.7
+ * Text Domain: cyrlitera
+ * Domain Path: /languages/
+ * Author URI: http://clearfy.pro
+ * Framework Version: FACTORY_000_VERSION
+ */
 
-	// Exit if accessed directly
-	if( !defined('ABSPATH') ) {
-		exit;
-	}
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-	define('WCTR_PLUGIN_VERSION', '1.0.6');
+if ( ! defined( 'WCTR_PLUGIN_VERSION' ) ) {
+	define( 'WCTR_PLUGIN_VERSION', '1.0.6' );
+}
 
-	define('WCTR_PLUGIN_DIR', dirname(__FILE__));
-	define('WCTR_PLUGIN_BASE', plugin_basename(__FILE__));
-	define('WCTR_PLUGIN_URL', plugins_url(null, __FILE__));
+// Fix for ithemes sync. When the ithemes sync plugin accepts the request, set the WP_ADMIN constant,
+// after which the plugin Clearfy begins to create errors, and how the logic of its work is broken.
+// Solution to simply terminate the plugin if there is a request from ithemes sync
+// --------------------------------------
+if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'ithemes_sync_request' ) {
+	return;
+}
 
-	#comp remove
-	// the following constants are used to debug features of diffrent builds
-	// on developer machines before compiling the plugin
+if ( isset( $_GET['ithemes-sync-request'] ) && ! empty( $_GET['ithemes-sync-request'] ) ) {
+	return;
+}
+// ----------------------------------------
 
-	// build: free, premium, ultimate
-	if( !defined('BUILD_TYPE') ) {
-		define('BUILD_TYPE', 'free');
-	}
-	// language: en_US, ru_RU
-	if( !defined('LANG_TYPE') ) {
-		define('LANG_TYPE', 'en_EN');
-	}
-	// license: free, paid
-	if( !defined('LICENSE_TYPE') ) {
-		define('LICENSE_TYPE', 'free');
-	}
+if ( ! defined( 'WCTR_PLUGIN_DIR' ) ) {
+	define( 'WCTR_PLUGIN_DIR', dirname( __FILE__ ) );
+}
+if ( ! defined( 'WCTR_PLUGIN_BASE' ) ) {
+	define( 'WCTR_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+}
+if ( ! defined( 'WCTR_PLUGIN_URL' ) ) {
+	define( 'WCTR_PLUGIN_URL', plugins_url( null, __FILE__ ) );
+}
 
-	// wordpress language
-	if( !defined('WPLANG') ) {
-		define('WPLANG', LANG_TYPE);
-	}
-	// the compiler library provides a set of functions like onp_build and onp_license
-	// to check how the plugin work for diffrent builds on developer machines
+#comp remove
+// the following constants are used to debug features of diffrent builds
+// on developer machines before compiling the plugin
 
-	if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
-		require('libs/onepress/compiler/boot.php');
-		// creating a plugin via the factory
-	}
-	// #fix compiller bug new Factory000_Plugin
-	#endcomp
+// build: free, premium, ultimate
+if ( ! defined( 'BUILD_TYPE' ) ) {
+	define( 'BUILD_TYPE', 'free' );
+}
+// language: en_US, ru_RU
+if ( ! defined( 'LANG_TYPE' ) ) {
+	define( 'LANG_TYPE', 'en_EN' );
+}
+// license: free, paid
+if ( ! defined( 'LICENSE_TYPE' ) ) {
+	define( 'LICENSE_TYPE', 'free' );
+}
 
-	if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
-		require_once(WCTR_PLUGIN_DIR . '/libs/factory/core/includes/check-compatibility.php');
-		require_once(WCTR_PLUGIN_DIR . '/libs/factory/clearfy/includes/check-clearfy-compatibility.php');
-	}
+// wordpress language
+if ( ! defined( 'WPLANG' ) ) {
+	define( 'WPLANG', LANG_TYPE );
+}
+// the compiler library provides a set of functions like onp_build and onp_license
+// to check how the plugin work for diffrent builds on developer machines
 
-	$plugin_info = array(
-		'prefix' => 'wbcr_cyrlitera_',
-		'plugin_name' => 'wbcr_cyrlitera',
-		'plugin_title' => __('Webcraftic Cyrlitera', 'cyrlitera'),
-		'plugin_version' => WCTR_PLUGIN_VERSION,
-		'plugin_build' => BUILD_TYPE,
-		'updates' => WCTR_PLUGIN_DIR . '/updates/'
-	);
+if ( ! defined( 'LOADING_CYRLITERA_AS_ADDON' ) ) {
+	require( 'libs/onepress/compiler/boot.php' );
+	// creating a plugin via the factory
+}
+// #fix compiller bug new Factory000_Plugin
+#endcomp
 
-	/**
-	 * Проверяет совместимость с Wordpress, php и другими плагинами.
-	 */
-	$compatibility = new Wbcr_FactoryClearfy_Compatibility(array_merge($plugin_info, array(
-		'plugin_already_activate' => defined('WCTR_PLUGIN_ACTIVE'),
-		'plugin_as_component' => defined('LOADING_CYRLITERA_AS_ADDON'),
-		'plugin_dir' => WCTR_PLUGIN_DIR,
-		'plugin_base' => WCTR_PLUGIN_BASE,
-		'plugin_url' => WCTR_PLUGIN_URL,
-		'required_php_version' => '5.3',
-		'required_wp_version' => '4.2.0',
-		'required_clearfy_check_component' => true
-	)));
+if ( ! defined( 'LOADING_CYRLITERA_AS_ADDON' ) ) {
+	require_once( WCTR_PLUGIN_DIR . '/libs/factory/core/includes/check-compatibility.php' );
+	require_once( WCTR_PLUGIN_DIR . '/libs/factory/clearfy/includes/check-clearfy-compatibility.php' );
+}
 
-	/**
-	 * Если плагин совместим, то он продолжит свою работу, иначе будет остановлен,
-	 * а пользователь получит предупреждение.
-	 */
-	if( !$compatibility->check() ) {
-		return;
-	}
+$plugin_info = array(
+	'prefix'         => 'wbcr_cyrlitera_',
+	'plugin_name'    => 'wbcr_cyrlitera',
+	'plugin_title'   => __( 'Webcraftic Cyrlitera', 'cyrlitera' ),
+	'plugin_version' => WCTR_PLUGIN_VERSION,
+	'plugin_build'   => BUILD_TYPE,
+	'updates'        => WCTR_PLUGIN_DIR . '/updates/'
+);
 
-	define('WCTR_PLUGIN_ACTIVE', true);
+/**
+ * Проверяет совместимость с Wordpress, php и другими плагинами.
+ */
+$compatibility = new Wbcr_FactoryClearfy_Compatibility( array_merge( $plugin_info, array(
+	'factory_version'                  => 'FACTORY_000_VERSION',
+	'plugin_already_activate'          => defined( 'WCTR_PLUGIN_ACTIVE' ),
+	'plugin_as_component'              => defined( 'LOADING_CYRLITERA_AS_ADDON' ),
+	'plugin_dir'                       => WCTR_PLUGIN_DIR,
+	'plugin_base'                      => WCTR_PLUGIN_BASE,
+	'plugin_url'                       => WCTR_PLUGIN_URL,
+	'required_php_version'             => '5.3',
+	'required_wp_version'              => '4.2.0',
+	'required_clearfy_check_component' => true
+) ) );
 
-	if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
-		require_once(WCTR_PLUGIN_DIR . '/libs/factory/core/boot.php');
-	}
+/**
+ * Если плагин совместим, то он продолжит свою работу, иначе будет остановлен,
+ * а пользователь получит предупреждение.
+ */
+if ( ! $compatibility->check() ) {
+	return;
+}
 
-	require_once(WCTR_PLUGIN_DIR . '/includes/class.helpers.php');
-	require_once(WCTR_PLUGIN_DIR . '/includes/class.plugin.php');
+define( 'WCTR_PLUGIN_ACTIVE', true );
 
-	if( !defined('LOADING_CYRLITERA_AS_ADDON') ) {
-		new WCTR_Plugin(__FILE__, $plugin_info);
-	}
+if ( ! defined( 'LOADING_CYRLITERA_AS_ADDON' ) ) {
+	require_once( WCTR_PLUGIN_DIR . '/libs/factory/core/boot.php' );
+}
+
+require_once( WCTR_PLUGIN_DIR . '/includes/class.helpers.php' );
+require_once( WCTR_PLUGIN_DIR . '/includes/class.plugin.php' );
+
+if ( ! defined( 'LOADING_CYRLITERA_AS_ADDON' ) ) {
+	new WCTR_Plugin( __FILE__, $plugin_info );
+}
