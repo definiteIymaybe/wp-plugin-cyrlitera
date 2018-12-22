@@ -81,7 +81,7 @@ class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
 	 * @return string
 	 */
 	public function forceSanitizeTitle( $title, $raw_title ) {
-		$title = WCTR_Helper::sanitizeTitle( $raw_title );
+		$title               = WCTR_Helper::sanitizeTitle( $raw_title );
 		$force_transliterate = sanitize_title_with_dashes( $title );
 		
 		return apply_filters( 'wbcr_cyrlitera_sanitize_title', $force_transliterate, $raw_title );
@@ -152,15 +152,15 @@ class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
 		 * @param string $filename_raw Filename as it was passed into sanitize_file_name().
 		 */
 		$special_chars = apply_filters( 'sanitize_file_name_chars', $special_chars, $filename_raw );
-		$filename = preg_replace( "#\x{00a0}#siu", ' ', $filename );
-		$filename = str_replace( $special_chars, '', $filename );
-		$filename = str_replace( array( '%20', '+' ), '-', $filename );
-		$filename = preg_replace( '/[\r\n\t -]+/', '-', $filename );
-		$filename = trim( $filename, '.-_' );
+		$filename      = preg_replace( "#\x{00a0}#siu", ' ', $filename );
+		$filename      = str_replace( $special_chars, '', $filename );
+		$filename      = str_replace( array( '%20', '+' ), '-', $filename );
+		$filename      = preg_replace( '/[\r\n\t -]+/', '-', $filename );
+		$filename      = trim( $filename, '.-_' );
 		
 		if ( false === strpos( $filename, '.' ) ) {
 			$mime_types = wp_get_mime_types();
-			$filetype = wp_check_filetype( 'test.' . $filename, $mime_types );
+			$filetype   = wp_check_filetype( 'test.' . $filename, $mime_types );
 			if ( $filetype['ext'] === $filename ) {
 				$filename = 'unnamed-file.' . $filetype['ext'];
 			}
@@ -181,9 +181,9 @@ class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
 		}
 		
 		// Process multiple extensions
-		$filename = array_shift( $parts );
+		$filename  = array_shift( $parts );
 		$extension = array_pop( $parts );
-		$mimes = get_allowed_mime_types();
+		$mimes     = get_allowed_mime_types();
 		
 		/*
 		 * Loop over any intermediate extensions. Postfix them with a trailing underscore
@@ -253,7 +253,8 @@ class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
 		if ( $is404 ) {
 			if ( $this->getPopulateOption( 'redirect_from_old_urls' ) ) {
 				$current_url = urldecode( $_SERVER['REQUEST_URI'] );
-				$new_url = WCTR_Helper::transliterate( $current_url, true );
+				$new_url     = WCTR_Helper::transliterate( $current_url, true );
+				$new_url     = strtolower( $new_url );
 				
 				if ( $current_url != $new_url ) {
 					wp_redirect( $new_url, 301 );
