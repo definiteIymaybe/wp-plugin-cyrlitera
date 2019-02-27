@@ -54,18 +54,49 @@ class WCTR_Helper {
 			}
 		}
 		
-		if ( ! is_admin() ) {
-			foreach ( $backtrace as $backtrace_entry ) {
-				if ( isset( $backtrace_entry['function'] ) && isset( $backtrace_entry['class'] ) ) {
+		foreach ( $backtrace as $backtrace_entry ) {
+			if ( isset( $backtrace_entry['function'] ) && isset( $backtrace_entry['class'] ) ) {
+				
+				# WOOCOMMERCE FIXES
+				# We need to cancel the transliteration of attributes for variable products,
+				# as this brings harm to users.
+				#------------------------------------
+				if ( class_exists( 'WooCommerce' ) ) {
+					$is_woo_variations = in_array( $backtrace_entry['function'], array(
+							'set_attributes',
+							'output',
+							'load_variations',
+							'prepare_set_attributes',
+							'save_attributes',
+							'add_variation',
+							'save_variations',
+							'read_variation_attributes'
+						) ) && in_array( $backtrace_entry['class'], array(
+							'WC_AJAX',
+							'WC_Product',
+							'WC_Meta_Box_Product_Data',
+							'WC_Product_Variable_Data_Store_CPT'
+						) );
+					
+					if ( $is_woo_variations ) {
+						return $origin_title;
+					}
+				}
+				#------------------------------------
+				
+				# FRONTEND FIXES
+				#------------------------------------
+				if ( ! is_admin() ) {
 					$is_query = in_array( $backtrace_entry['function'], array(
-						'query_posts',
-						'get_terms'
-					) ) and in_array( $backtrace_entry['class'], array( 'WP', 'WP_Term_Query' ) );
+							'query_posts',
+							'get_terms'
+						) ) && in_array( $backtrace_entry['class'], array( 'WP', 'WP_Term_Query' ) );
 					
 					if ( $is_query ) {
 						return $origin_title;
 					}
 				}
+				#------------------------------------
 			}
 		}
 		
