@@ -61,7 +61,7 @@ class WCTR_Helper {
 				# We need to cancel the transliteration of attributes for variable products,
 				# as this brings harm to users.
 				#------------------------------------
-				if ( class_exists( 'WooCommerce' ) ) {
+				/*if ( class_exists( 'WooCommerce' ) ) {
 					$is_woo_variations = in_array( $backtrace_entry['function'], array(
 							'set_attributes',
 							'output',
@@ -81,7 +81,7 @@ class WCTR_Helper {
 					if ( $is_woo_variations ) {
 						return $origin_title;
 					}
-				}
+				}*/
 				#------------------------------------
 				
 				# FRONTEND FIXES
