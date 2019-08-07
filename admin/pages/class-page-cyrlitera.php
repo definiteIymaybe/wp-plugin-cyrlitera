@@ -1,43 +1,68 @@
 <?php
-
-/**
- * The page Settings.
- *
- * @since 1.0.0
- */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Страница общих настроек для этого плагина.
+ *
+ * Может быть использована только, если этот плагин используется как отдельный плагин, а не как аддон
+ * дя плагина Clearfy. Если плагин загружен, как аддон для Clearfy, эта страница не будет подключена.
+ *
+ * Поддерживает режим работы с мультисаймами. Вы можете увидеть эту страницу в панели настройки сети.
+ *
+ * @author        Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @copyright (c) 2018 Webraftic Ltd
+ * @version       1.0
+ */
 class WCTR_CyrliteraPage extends Wbcr_FactoryClearfy000_PageBase {
 
 	/**
-	 * The id of the page in the admin menu.
-	 *
-	 * Mainly used to navigate between pages.
-	 *
-	 * @since 1.0.0
-	 * @see   FactoryPages000_AdminPage
+	 * {@inheritDoc}
 	 *
 	 * @var string
 	 */
 	public $id = "transliteration";
-	public $page_parent_page = "seo";
-	public $page_menu_dashicon = 'dashicons-testimonial';
+
 	/**
-	 * Доступена для мультисайтов
+	 * {@inheritDoc}
+	 *
+	 * @var string
+	 */
+	public $page_parent_page = "seo";
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @var string
+	 */
+	public $page_menu_dashicon = 'dashicons-testimonial';
+
+	/**
+	 * {@inheritDoc}
 	 *
 	 * @var bool
 	 */
 	public $available_for_multisite = true;
 
 	/**
-	 * @param Wbcr_Factory000_Plugin $plugin
+	 * {@inheritDoc}
+	 *
+	 * @since  1.1.0
+	 * @var bool
+	 */
+	public $show_right_sidebar_in_options = true;
+
+	/**
+	 * WCTR_CyrliteraPage constructor.
+	 *
+	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+	 *
+	 * @param \Wbcr_Factory000_Plugin $plugin
 	 */
 	public function __construct( Wbcr_Factory000_Plugin $plugin ) {
-		$this->menu_title = __( 'Transliteration', 'cyrlitera' );
+		$this->menu_title = __( 'Cyrlitera', 'cyrlitera' );
 
 		if ( ! defined( 'LOADING_CYRLITERA_AS_ADDON' ) ) {
 			$this->internal                   = false;
@@ -50,6 +75,7 @@ class WCTR_CyrliteraPage extends Wbcr_FactoryClearfy000_PageBase {
 
 		$this->plugin = $plugin;
 	}
+
 
 	public function getPageTitle() {
 		return defined( 'LOADING_CYRLITERA_AS_ADDON' ) ? __( 'Transliteration', 'cyrlitera' ) : __( 'General', 'cyrlitera' );

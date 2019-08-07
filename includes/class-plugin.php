@@ -68,10 +68,8 @@ class WCTR_Plugin extends Wbcr_Factory000_Plugin {
 	 * @since  1.0.0
 	 */
 	protected function init_activation() {
-		if ( ! $this->as_addon ) {
-			include_once( WCTR_PLUGIN_DIR . '/admin/activation.php' );
-			self::app()->registerActivation( 'WCTR_Activation' );
-		}
+		include_once( WCTR_PLUGIN_DIR . '/admin/activation.php' );
+		self::app()->registerActivation( 'WCTR_Activation' );
 	}
 
 	/**
@@ -80,8 +78,8 @@ class WCTR_Plugin extends Wbcr_Factory000_Plugin {
 	 * @throws \Exception
 	 */
 	private function register_pages() {
-		self::app()->registerPage( 'WCTR_CyrliteraPage', WCTR_PLUGIN_DIR . '/admin/pages/cyrlitera.php' );
-		self::app()->registerPage( 'WCTR_MoreFeaturesPage', WCTR_PLUGIN_DIR . '/admin/pages/more-features.php' );
+		self::app()->registerPage( 'WCTR_CyrliteraPage', WCTR_PLUGIN_DIR . '/admin/pages/class-page-cyrlitera.php' );
+		self::app()->registerPage( 'WCTR_MoreFeaturesPage', WCTR_PLUGIN_DIR . '/admin/pages/class-page-more-features.php' );
 	}
 
 	/**
