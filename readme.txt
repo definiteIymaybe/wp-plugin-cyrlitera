@@ -1,6 +1,6 @@
 === Cyrlitera – transliteration of links and file names  ===
 Tags: translitera, cyrillic, latin, l10n, russian, rustolat, slugs, translations, transliteration, media, georgian, european, diacritics, ukrainian
-Contributors: webcraftic
+Contributors: webcraftic, creativemotion, alexkovalevv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 4.2
 Tested up to: 4.9
