@@ -10,19 +10,12 @@
 [submodule "libs/factory/pages"]
 	path = libs/factory/pages
 	url = ssh://git@bitbucket.org/webcraftic/wp-plugins-factory-pages/
-[submodule "libs/factory/font-awesome"]
-	path = libs/factory/font-awesome
-	url = ssh://git@bitbucket.org/webcraftic/wp-plugins-factory-fontawesome
 [submodule "libs/onepress/compiler"]
 	path = libs/onepress/compiler
 	url = ssh://git@bitbucket.org/webcraftic/wp-plugins-factory-compiler/
 [submodule "libs/factory/clearfy"]
 	path = libs/factory/clearfy
 	url = ssh://git@bitbucket.org/webcraftic/wp-plugins-factory-clearfy
-
-[submodule "libs/factory/notices"]
-	path = libs/factory/notices
-	url = ssh://git@bitbucket.org/webcraftic/wp-plugins-factory-notices
 [submodule "libs/factory/adverts"]
 	path = libs/factory/adverts
 	url = ssh://git@bitbucket.org/webcraftic/wp-plugins-factory-adverts
