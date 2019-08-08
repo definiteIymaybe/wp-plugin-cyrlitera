@@ -64,7 +64,7 @@ $wctr_plugin_info = array(
 	)
 );
 
-$wga_compatibility = new Wbcr_Factory000_Requirements( __FILE__, array_merge( $wctr_plugin_info, array(
+$wctr_compatibility = new Wbcr_Factory000_Requirements( __FILE__, array_merge( $wctr_plugin_info, array(
 	'plugin_already_activate'          => defined( 'WCTR_PLUGIN_ACTIVE' ),
 	'required_php_version'             => '5.4',
 	'required_wp_version'              => '4.2.0',
@@ -76,7 +76,7 @@ $wga_compatibility = new Wbcr_Factory000_Requirements( __FILE__, array_merge( $w
  * If the plugin is compatible, then it will continue its work, otherwise it will be stopped,
  * and the user will throw a warning.
  */
-if ( ! $wga_compatibility->check() ) {
+if ( ! $wctr_compatibility->check() ) {
 	return;
 }
 
@@ -90,7 +90,7 @@ if ( ! $wga_compatibility->check() ) {
 
 // This plugin is activated
 define( 'WCTR_PLUGIN_ACTIVE', true );
-define( 'WCTR_PLUGIN_VERSION', $wga_compatibility->get_plugin_version() );
+define( 'WCTR_PLUGIN_VERSION', $wctr_compatibility->get_plugin_version() );
 define( 'WCTR_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'WCTR_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 define( 'WCTR_PLUGIN_URL', plugins_url( null, __FILE__ ) );
@@ -186,18 +186,18 @@ require_once( WCTR_PLUGIN_DIR . '/includes/class-plugin.php' );
 try {
 	new WCTR_Plugin( __FILE__, array_merge( $wctr_plugin_info, array(
 		'plugin_version'     => WCTR_PLUGIN_VERSION,
-		'plugin_text_domain' => $wga_compatibility->get_text_domain(),
+		'plugin_text_domain' => $wctr_compatibility->get_text_domain(),
 	) ) );
 } catch( Exception $e ) {
 	// Plugin wasn't initialized due to an error
 	define( 'WCTR_PLUGIN_THROW_ERROR', true );
 
-	$wga_plugin_error_func = function () use ( $e ) {
+	$wctr_plugin_error_func = function () use ( $e ) {
 		$error = sprintf( "The %s plugin has stopped. <b>Error:</b> %s Code: %s", 'Webcraftic Cyrlitera', $e->getMessage(), $e->getCode() );
 		echo '<div class="notice notice-error"><p>' . $error . '</p></div>';
 	};
 
-	add_action( 'admin_notices', $wga_plugin_error_func );
-	add_action( 'network_admin_notices', $wga_plugin_error_func );
+	add_action( 'admin_notices', $wctr_plugin_error_func );
+	add_action( 'network_admin_notices', $wctr_plugin_error_func );
 }
 // @formatter:on
