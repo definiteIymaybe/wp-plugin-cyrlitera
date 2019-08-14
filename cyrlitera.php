@@ -4,7 +4,7 @@
  * Plugin URI: https://webcraftic.com
  * Description: The plugin converts Cyrillic, Georgian links, filenames into Latin. It is necessary for correct work of WordPress plugins and improve links readability.
  * Author: Webcraftic <wordpress.webraftic@gmail.com>
- * Version: 1.2.0
+ * Version: 1.1.1
  * Text Domain: cyrlitera
  * Domain Path: /languages/
  * Author URI: https://webcraftic.com
@@ -52,6 +52,14 @@ $wctr_plugin_info = array(
 			'support'  => 'support',           // {site}/support
 			'docs'     => 'docs'               // {site}/docs
 		)
+	),
+
+	// PLUGIN ADVERTS
+	'render_adverts' => true,
+	'adverts_settings'    => array(
+		'dashboard_widget' => true, // show dashboard widget (default: false)
+		'right_sidebar'    => true, // show adverts sidebar (default: false)
+		'notice'           => true, // show notice message (default: false)
 	),
 
 	// FRAMEWORK MODULES
@@ -162,6 +170,16 @@ if ( ! defined( 'FACTORY_UPDATES_DEBUG' ) ) {
  */
 if ( ! defined( 'FACTORY_ADVERTS_DEBUG' ) ) {
 	define( 'FACTORY_ADVERTS_DEBUG', true );
+}
+
+/**
+ * Остановить показ рекламы для всех плагинов созданных на Factory фреймворке.
+ * Это может пригодиться в некоторых случаях, при неисправностях или из-за
+ * файрвола в стране пользователя. Чтобы реклама не обременяла пользователя
+ * он может ее заблокировать.
+ */
+if ( ! defined( 'FACTORY_ADVERTS_BLOCK' ) ) {
+	define( 'FACTORY_ADVERTS_BLOCK', false );
 }
 
 // the compiler library provides a set of functions like onp_build and onp_license

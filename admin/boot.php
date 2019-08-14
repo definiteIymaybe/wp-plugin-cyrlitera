@@ -2,9 +2,9 @@
 /**
  * Admin boot
  *
- * @author    Webcraftic <wordpress.webraftic@gmail.com>
- * @copyright Webcraftic 25.05.2017
- * @version   1.0
+ * @author        Alexander Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
+ * @copyright     Webcraftic 25.05.2017
+ * @version       1.0
  */
 
 // Exit if accessed directly
@@ -118,7 +118,7 @@ function wbcr_cyrlitera_admin_conflict_notices_error( $notices, $plugin_name ) {
 	return $notices;
 }
 
-add_action( 'wbcr_factory_notices_000_list', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2 );
+add_action( 'wbcr/factory/admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2 );
 
 function wbcr_cyrlitera_group_options( $options ) {
 	$install_conflict_plugins = wbcr_cyrlitera_install_conflict_plugins();
@@ -225,7 +225,7 @@ add_filter( 'wbcr_factory_pages_000_imppage_rating_widget_url', 'wbcr_cyrlitera_
  */
 add_filter( 'wbcr/factory/pages/impressive/widgets', function ( $widgets, $position, $plugin ) {
 	if ( WCTR_Plugin::app()->getPluginName() == $plugin->getPluginName() && 'right' == $position ) {
-		unset( $widgets['businnes_suggetion'] );
+		unset( $widgets['business_suggetion'] );
 		unset( $widgets['rating_widget'] );
 		unset( $widgets['info_widget'] );
 	}

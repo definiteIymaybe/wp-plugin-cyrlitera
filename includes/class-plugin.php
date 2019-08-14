@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Transliteration core class
  *
- * @author        Alex Kovalev <alex.kovalevv@gmail.com>
+ * @author        Alexander Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright (c) 19.02.2018, Webcraftic
  */
 class WCTR_Plugin extends Wbcr_Factory000_Plugin {
@@ -83,32 +83,14 @@ class WCTR_Plugin extends Wbcr_Factory000_Plugin {
 	}
 
 	/**
-	 * Регистрирует рекламные объявления от студии Webcraftic
-	 *
-	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
-	 * @since  1.2.0
-	 */
-	private function register_adverts_blocks() {
-		global $wdan_adverts;
-
-		$wdan_adverts = new WBCR\Factory_Adverts_000\Base( __FILE__, array_merge( $this->plugin_data, [
-			'dashboard_widget' => true, // show dashboard widget (default: false)
-			'right_sidebar'    => true, // show adverts sidebar (default: false)
-			'notice'           => false, // show notice message (default: false)
-		] ) );
-	}
-
-	/**
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 * @throws \Exception
 	 */
 	private function admin_scripts() {
 		require_once( WCTR_PLUGIN_DIR . '/admin/boot.php' );
-		require_once( WCTR_PLUGIN_DIR . '/admin/options.php' );
 
 		$this->init_activation();
 		$this->register_pages();
-		$this->register_adverts_blocks();
 	}
 
 	private function global_scripts() {

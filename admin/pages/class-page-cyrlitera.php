@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Поддерживает режим работы с мультисаймами. Вы можете увидеть эту страницу в панели настройки сети.
  *
- * @author        Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @author        Alexander Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright (c) 2018 Webraftic Ltd
  * @version       1.0
  */

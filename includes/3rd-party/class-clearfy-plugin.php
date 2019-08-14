@@ -1,17 +1,16 @@
 <?php
-/**
- * Local Google Analytic
- *
- * @author        Alexander Kovalev <alex.kovalevv@gmail.com>
- * @copyright (c) 2018 Webraftic Ltd
- * @version       1.0
- */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Cyrlitera
+ *
+ * @author        Alexander Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
+ * @copyright (c) 2018 Webraftic Ltd
+ * @version       1.0
+ */
 class WCTR_Plugin {
 
 	/**
@@ -55,31 +54,13 @@ class WCTR_Plugin {
 	}
 
 	/**
-	 * Регистрирует рекламные объявления от студии Webcraftic
-	 *
-	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
-	 * @since  1.2.0
-	 */
-	private function register_adverts_blocks() {
-		global $wdan_adverts;
-
-		$wdan_adverts = new WBCR\Factory_Adverts_000\Base( __FILE__, array_merge( $this->plugin_data, [
-			'dashboard_widget' => true, // show dashboard widget (default: false)
-			'right_sidebar'    => true, // show adverts sidebar (default: false)
-			'notice'           => false, // show notice message (default: false)
-		] ) );
-	}
-
-	/**
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 * @throws \Exception
 	 */
 	private function admin_scripts() {
 		require_once( WCTR_PLUGIN_DIR . '/admin/boot.php' );
-		require_once( WCTR_PLUGIN_DIR . '/admin/options.php' );
 
 		$this->register_pages();
-		$this->register_adverts_blocks();
 	}
 
 	/**

@@ -5,7 +5,7 @@
  * Файл будет подключен только в плагине Clearfy, используя особый вариант загрузки. Это более простое решение
  * пришло на смену встроенной системы подключения аддонов в фреймворке.
  *
- * @author        Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @author        Alexander Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright (c) 2018 Webraftic Ltd
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'WCTR_PLUGIN_ACTIVE' ) ) {
-	define( 'WCTR_PLUGIN_VERSION', '1.2.0' );
+	define( 'WCTR_PLUGIN_VERSION', '1.1.1' );
 	define( 'WCTR_PLUGIN_ACTIVE', true );
 
 	// Этот плагин загружен, как аддон для плагина Clearfy

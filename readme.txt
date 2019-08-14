@@ -3,8 +3,8 @@ Tags: translitera, cyrillic, latin, l10n, russian, rustolat, slugs, translations
 Contributors: webcraftic, creativemotion, alexkovalevv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 4.2
-Tested up to: 4.9
-Requires PHP: 5.2
+Tested up to: 5.2
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2
 
@@ -77,22 +77,21 @@ We invite you to check out a few other related free plugins that our team has al
 
 == Frequently Asked Questions ==
 
-= Does plugin work with multisite? =
-No plugin does not support multisites. This is temporary and we will try to add support for networks in the future.
-
 = Converts characters incorrectly? =
 Try to change the problematic symbols in the plugin's settings with the symbol base enlargement field. These characters will replace the default characters.
 
 = How to restore converted URLs? =
 There is a "Rollback changes" button in the plugin settings. This option works only for links, which has been transliterated. This will not work for filenames.
+
 == Screenshots ==
 1. Setting page
 2. Simple for posts
 2. Simple for filenames
 
 == Changelog ==
-= 1.1.0 =
+= 1.1.1 =
 * Added: Compatibility with Wordpress 4.2 - 5.x
+* Added: Gutenberg support
 * Added: Multisite support
 * Fixed: Minor bugs
 
@@ -106,8 +105,10 @@ Fixed: Added option to disable transliteration on frontend
 Fixed: Bug with transliteration of file names
 Added: Compatibility with PHP 7.2
 Added: Forced transliteration for file names
+
 = 1.0.3 =
 * Fixed: Small bugs
+
 = 1.0.2 =
 * Added: Function of converting files to lowercase
 * Added: Forced transliteration function
@@ -115,7 +116,9 @@ Added: Forced transliteration for file names
 * Added: Ability to change the base of symbols of transliteration
 * Added: Button for converting old posts, categories, tags
 * Added: Button to restore old links
+
 = 1.0.1 =
 * Fixed small bugs
+
 = 1.0.0 =
 * Plugin release
