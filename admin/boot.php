@@ -45,8 +45,6 @@ function wbcr_cyrlitera_install_conflict_plugins() {
 	return $install_plugins;
 }
 
-add_action( 'wbcr/factory/admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2 );
-
 /**
  * @return array
  */
@@ -98,6 +96,8 @@ function wbcr_cyrlitera_admin_conflict_notices_error( $notices, $plugin_name ) {
 
 	return $notices;
 }
+
+add_action( 'wbcr/factory/admin_notices', 'wbcr_cyrlitera_admin_conflict_notices_error', 10, 2 );
 
 if ( ! defined( 'LOADING_CYRLITERA_AS_ADDON' ) ) {
 	function wbcr_cyrlitera_set_plugin_meta( $links, $file ) {

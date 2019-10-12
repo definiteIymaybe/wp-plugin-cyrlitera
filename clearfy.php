@@ -35,6 +35,7 @@ if ( ! defined( 'WCTR_PLUGIN_ACTIVE' ) ) {
 
 	try {
 		// Global scripts
+		require_once( WCTR_PLUGIN_DIR . '/includes/class-helpers.php' );
 		require_once( WCTR_PLUGIN_DIR . '/includes/3rd-party/class-clearfy-plugin.php' );
 		new WCTR_Plugin();
 	} catch( Exception $e ) {
