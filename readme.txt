@@ -89,6 +89,10 @@ There is a "Rollback changes" button in the plugin settings. This option works o
 2. Simple for filenames
 
 == Changelog ==
+= 1.1.2 (15.12.2020) =
+* Added: Subscribe form
+* Fixed: Minor bugs
+
 = 1.1.1 =
 * Added: Compatibility with Wordpress 4.2 - 5.x
 * Added: Gutenberg support
