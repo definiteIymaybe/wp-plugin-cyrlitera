@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @copyright (c) 2018 Webraftic Ltd
  * @version       1.0
  */
-class WCTR_CyrliteraPage extends Wbcr_FactoryClearfy000_PageBase {
+class WCTR_CyrliteraPage extends WBCR\Factory_Templates_000\Pages\PageBase {
 
 	/**
 	 * {@inheritDoc}

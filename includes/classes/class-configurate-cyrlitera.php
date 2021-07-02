@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
+class WCTR_ConfigurateCyrlitera extends WBCR\Factory_Templates_000\Configurate {
 
 	public function registerActionsAndFilters() {
 
@@ -235,7 +235,7 @@ class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy000_Configurate {
 	 * Перенаправление со старых url, которые были уже преобразованы
 	 */
 	public function redirectFromOldUrls() {
-		if ( ! WbcrFactoryClearfy000_Helpers::isPermalink() ) {
+		if ( ! WBCR\Factory_Templates_000\Helpers::isPermalink() ) {
 			return;
 		}
 		$is404 = is_404();
