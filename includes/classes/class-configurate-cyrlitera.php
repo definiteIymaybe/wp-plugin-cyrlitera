@@ -258,7 +258,7 @@ class WCTR_ConfigurateCyrlitera extends Wbcr_FactoryClearfy230_Configurate {
 				$new_url     = strtolower( $new_url );
 
 				if ( $current_url != $new_url ) {
-					wp_redirect( $new_url, 301 );
+					wp_redirect( $new_url, 307 );
 				}
 			}
 		}
