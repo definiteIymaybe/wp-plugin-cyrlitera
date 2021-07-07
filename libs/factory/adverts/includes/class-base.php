@@ -95,11 +95,10 @@ class Base {
 			'support'            => false
 		] );
 
-		$this->api = new Creative_Motion_API( $this->plugin );
-
-		add_filter( 'wbcr/factory/pages/impressive/widgets', [ $this, 'register_plugin_widgets' ], 10, 3 );
-		add_action( 'wbcr/factory/admin_notices', [ $this, 'register_plugin_notice' ], 10, 2 );
-		add_action( 'current_screen', [ $this, 'register_dashboard_widget' ], 10, 2 );
+		// $this->api = new Creative_Motion_API( $this->plugin );
+		// add_filter( 'wbcr/factory/pages/impressive/widgets', [ $this, 'register_plugin_widgets' ], 10, 3 );
+		// add_action( 'wbcr/factory/admin_notices', [ $this, 'register_plugin_notice' ], 10, 2 );
+		// add_action( 'current_screen', [ $this, 'register_dashboard_widget' ], 10, 2 );
 	}
 
 	/**

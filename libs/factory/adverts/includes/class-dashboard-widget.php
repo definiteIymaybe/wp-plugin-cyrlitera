@@ -56,12 +56,12 @@ class Dashboard_Widget {
 
 		if ( ! empty( $this->content ) ) {
 			if ( $this->plugin->isNetworkActive() && $this->plugin->isNetworkAdmin() ) {
-				add_action( 'wp_network_dashboard_setup', [ $this, 'add_dashboard_widgets' ], 999 );
+				// add_action( 'wp_network_dashboard_setup', [ $this, 'add_dashboard_widgets' ], 999 );
 
 				return;
 			}
 
-			add_action( 'wp_dashboard_setup', [ $this, 'add_dashboard_widgets' ], 999 );
+			// add_action( 'wp_dashboard_setup', [ $this, 'add_dashboard_widgets' ], 999 );
 		}
 	}
 
@@ -71,14 +71,15 @@ class Dashboard_Widget {
 	 * @since 1.0.0 Added
 	 */
 	public function add_dashboard_widgets() {
-		$widget_id = 'wbcr-factory-adverts-widget';
 
-		wp_add_dashboard_widget( $widget_id, $this->plugin->getPluginTitle() . ' News', [
-			$this,
-			'print_widget_content'
-		] );
+		// $widget_id = 'wbcr-factory-adverts-widget';
 
-		$this->sort_dashboard_widgets( $widget_id );
+		// wp_add_dashboard_widget( $widget_id, $this->plugin->getPluginTitle() . ' News', [
+		// 	$this,
+		// 	'print_widget_content'
+		// ] );
+
+		// $this->sort_dashboard_widgets( $widget_id );
 	}
 
 	/**
