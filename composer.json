@@ -1,0 +1,39 @@
+{
+  "name": "definiteIymaybe/wp-plugin-cyrlitera",
+  "description": "A fork of Webcraftic Cyrlitera WordPress plugin",
+  "keywords": [
+    "translitera",
+    "cyrillic",
+    "latin",
+    "l10n",
+    "russian",
+    "rustolat",
+    "slugs",
+    "translations",
+    "transliteration",
+    "media",
+    "georgian",
+    "european",
+    "diacritics",
+    "ukrainian"
+  ],
+  "authors": [
+    {
+      "name": "Webcraftic",
+      "homepage": "https://webcraftic.com/"
+    },
+    {
+      "name": "Creativemotion",
+      "homepage": "https://cm-wp.com/"
+    },
+    {
+      "name": "Alexander Kovalev",
+      "homepage": "https://alexkovalev.me/"
+    }
+  ],
+  "homepage": "https://github.com/definiteIymaybe/wp-plugin-cyrlitera",
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.4"
+  }
+}
