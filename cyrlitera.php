@@ -8,7 +8,7 @@
  * Text Domain: cyrlitera
  * Domain Path: /languages/
  * Author URI: https://webcraftic.com
- * Framework Version: FACTORY_000_VERSION
+ * Framework Version: FACTORY_439_VERSION
  */
 
 // Exit if accessed directly
@@ -68,15 +68,15 @@ $wctr_plugin_info = array(
 
 	// FRAMEWORK MODULES
 	'load_factory_modules' => array(
-		array('libs/factory/bootstrap', 'factory_bootstrap_000', 'admin'),
-		array('libs/factory/forms', 'factory_forms_000', 'admin'),
-		array('libs/factory/pages', 'factory_pages_000', 'admin'),
-		array('libs/factory/clearfy', 'factory_templates_000', 'all'),
-		array('libs/factory/adverts', 'factory_adverts_000', 'admin')
+		array('libs/factory/bootstrap', 'factory_bootstrap_439', 'admin'),
+		array('libs/factory/forms', 'factory_forms_436', 'admin'),
+		array('libs/factory/pages', 'factory_pages_438', 'admin'),
+		array('libs/factory/clearfy', 'factory_clearfy_230', 'all'),
+		array('libs/factory/adverts', 'factory_adverts_117', 'admin')
 	)
 );
 
-$wctr_compatibility = new Wbcr_Factory000_Requirements(__FILE__, array_merge($wctr_plugin_info, array(
+$wctr_compatibility = new Wbcr_Factory439_Requirements(__FILE__, array_merge($wctr_plugin_info, array(
 	'plugin_already_activate' => defined('WCTR_PLUGIN_ACTIVE'),
 	'required_php_version' => '5.4',
 	'required_wp_version' => '4.2.0',
@@ -106,92 +106,7 @@ define('WCTR_PLUGIN_DIR', dirname(__FILE__));
 define('WCTR_PLUGIN_BASE', plugin_basename(__FILE__));
 define('WCTR_PLUGIN_URL', plugins_url(null, __FILE__));
 
-#comp remove
-// Эта часть кода для компилятора, не требует редактирования.
-// Все отладочные константы будут удалены после компиляции плагина.
 
-// Сборка плагина
-// build: free, premium, ultimate
-if( !defined('BUILD_TYPE') ) {
-	define('BUILD_TYPE', 'free');
-}
-// Языки уже не используются, нужно для работы компилятора
-// language: en_US, ru_RU
-if( !defined('LANG_TYPE') ) {
-	define('LANG_TYPE', 'en_EN');
-}
-
-// Тип лицензии
-// license: free, paid
-if( !defined('LICENSE_TYPE') ) {
-	define('LICENSE_TYPE', 'free');
-}
-
-// wordpress language
-if( !defined('WPLANG') ) {
-	define('WPLANG', LANG_TYPE);
-}
-
-/**
- * Включить режим отладки миграций с версии x.x.x до x.x.y. Если true и
- * установлена константа FACTORY_MIGRATIONS_FORCE_OLD_VERSION, ваш файл
- * миграции будет вызваться постоянно.
- */
-if( !defined('FACTORY_MIGRATIONS_DEBUG') ) {
-	define('FACTORY_MIGRATIONS_DEBUG', false);
-
-	/**
-	 * Так как, после первого выполнения миграции, плагин обновляет
-	 * опцию plugin_version, чтобы миграция больше не выполнялась,
-	 * в тестовом режиме миграций, старая версия плагина берется не
-	 * из опции в базе данных, а из текущей константы.
-	 *
-	 * Новая версия плагина всегда берется из константы WCTR_PLUGIN_VERSION
-	 * или из комментариев к входному файлу плагина.
-	 */
-	//define( 'FACTORY_MIGRATIONS_FORCE_OLD_VERSION', '1.1.9' );
-}
-
-/**
- * Включить режим отладки обновлений плагина и обновлений его премиум версии.
- * Если true, плагин не будет кешировать результаты проверки обновлений, а
- * будет проверять обновления через установленный интервал в константе
- * FACTORY_CHECK_UPDATES_INTERVAL.
- */
-if( !defined('FACTORY_UPDATES_DEBUG') ) {
-	define('FACTORY_UPDATES_DEBUG', false);
-
-	// Через какой интервал времени проверять обновления на удаленном сервере?
-	define('FACTORY_CHECK_UPDATES_INTERVAL', MINUTE_IN_SECONDS);
-}
-
-/**
- * Включить режим отладки для рекламного модуля. Если FACTORY_ADVERTS_DEBUG true,
- * то рекламный модуля не будет кешировать запросы к сереверу. Упрощает настройку
- * рекламы.
- */
-if( !defined('FACTORY_ADVERTS_DEBUG') ) {
-	define('FACTORY_ADVERTS_DEBUG', true);
-}
-
-/**
- * Остановить показ рекламы для всех плагинов созданных на Factory фреймворке.
- * Это может пригодиться в некоторых случаях, при неисправностях или из-за
- * файрвола в стране пользователя. Чтобы реклама не обременяла пользователя
- * он может ее заблокировать.
- */
-if( !defined('FACTORY_ADVERTS_BLOCK') ) {
-	define('FACTORY_ADVERTS_BLOCK', false);
-}
-
-// the compiler library provides a set of functions like onp_build and onp_license
-// to check how the plugin work for diffrent builds on developer machines
-
-require_once(WCTR_PLUGIN_DIR . '/libs/onepress/compiler/boot.php');
-// creating a plugin via the factory
-
-// #fix compiller bug new Factory000_Plugin
-#endcomp
 
 /**
  * -----------------------------------------------------------------------------

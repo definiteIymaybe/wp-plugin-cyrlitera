@@ -3,7 +3,7 @@ Tags: translitera, cyrillic, latin, l10n, russian, rustolat, slugs, translations
 Contributors: webcraftic, creativemotion, alexkovalevv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VDX7JNTQPNPFW
 Requires at least: 4.2
-Tested up to: 5.6
+Tested up to: 5.2
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2
